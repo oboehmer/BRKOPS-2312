@@ -1,0 +1,68 @@
+cleaners:
+  PyatsDeviceClean:
+    module: genie.libs.clean
+    groups: [WAN]
+
+groups:
+  WAN:
+    devices: [router1, router2]
+    order:
+      - connect
+      - copy_to_device
+      - change_boot_variable
+      - write_erase
+      - reload
+      - apply_configuration
+      - verify_running_image
+      - ping_server
+
+    #####################
+    
+    connect:
+      via: a
+
+    ping_server:
+      server: 10.2.0.254
+      vrf: Mgmt-intf
+
+    write_erase:
+
+    copy_to_device:
+      origin:
+        hostname: ftp
+        files: 
+           - isr4300-universalk9.16.06.05.SPA.bin
+      destination:
+        directory: 'bootflash:'
+      protocol: ftp
+      overwrite: True
+      verify_num_images: False
+      check_file_stability: True
+      min_free_space_percent: 50
+      vrf: Mgmt-intf
+
+    change_boot_variable:
+       images:
+          - bootflash:/isr4300-universalk9.16.06.05.SPA.bin
+   
+    verify_running_image:
+       images:
+          - bootflash:isr4300-universalk9.16.06.05.SPA.bin
+
+    reload:
+      reconnect_via: a
+      check_modules:
+        check: False
+
+    # apply basic configuration to startup, will be defined per
+    # devices further down
+    apply_configuration:
+
+devices:
+  router1:
+    apply_configuration:
+      configuration_from_file: configs/r-1.txt
+  router2:
+    apply_configuration:
+      configuration_from_file: configs/r-2.txt
+

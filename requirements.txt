@@ -1,0 +1,3 @@
+robotframework>=5
+robotframework-debuglibrary
+pyats[full]

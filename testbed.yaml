@@ -1,0 +1,47 @@
+testbed:
+  credentials:
+    default:
+      username: cldemo
+      password: "%ENV{DEVICE_PASSWORD}"
+
+devices:
+  r1:
+    type: router
+    os: iosxe
+    custom:
+      abstraction:
+        order: [os]
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        protocol: ssh
+        ip: 10.12.63.11
+  r2:
+    type: router
+    os: iosxe
+    custom:
+      abstraction:
+        order: [os]
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        protocol: ssh
+        ip: 10.12.63.12
+  r3:
+    type: router
+    os: iosxr
+    custom:
+      abstraction:
+        order: [os]
+    credentials:
+      default:
+        username: cisco
+        password: cisco
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        protocol: ssh
+        ip: 10.12.63.13

@@ -1,0 +1,240 @@
+.
+├── data
+│   ├── baseline
+│   │   └── baseline_data.yaml
+│   ├── common.yaml
+│   ├── netconf.yaml
+│   └── topology
+│       └── testbed.yaml
+├── jobfiles
+│   ├── asr9010
+│   │   ├── 01_Normal_Template.robot
+│   │   ├── 1.1_Router_Management
+│   │   │   ├── 1.1.1.1_Initial_Hardware_ROMMON.robot
+│   │   │   ├── 1.1.1.2_Software_Verification.robot
+│   │   │   ├── 1.1.1.3_Initial_Configuration.robot
+│   │   │   ├── 1.1.1.4_Background_Traffic_flows.robot
+│   │   │   ├── 1.1.1.5_System_Bootup_Verification.robot
+│   │   │   ├── 1.1.2.1_Banner.robot
+│   │   │   ├── 1.1.2.2_Idle_Timeout_Console.robot
+│   │   │   ├── 1.1.2.3_Idle_Timeout_SSH.robot
+│   │   │   ├── 1.1.2.4_Test_TACACS_Authentication.robot
+│   │   │   ├── 1.1.2.7_Management_Plane_Protection_for_SSH.robot
+│   │   │   ├── 1.1.2.8_Management_Plane_Protection_for_SNMP.robot
+│   │   │   ├── 1.1.2.10_SNMP_ACL.robot
+│   │   │   ├── 1.1.4.1_100G_Physical_and_Bundle_Link_Up_Down.robot
+│   │   │   ├── 1.1.4.2_10G_Physical_and_Bundle_Link_Up_Down.robot
+│   │   │   ├── 1.1.4.3_ISIS_Session_Up_Down.robot
+│   │   │   ├── 1.1.4.4_LDP_Session_Up_Down.robot
+│   │   │   ├── 1.1.4.5_BGP_Session_Up_Down.robot
+│   │   │   └── 1.1.4.6_SNMP_Walk.robot
+│   │   ├── 1.2_Functional
+│   │   │   ├── 1.2.1.3_Netflow_MPLS.robot
+│   │   │   ├── 1.2.1.4_Netflow_IPv4.robot
+│   │   │   ├── 1.2.1.5_ECMP_100G.robot
+│   │   │   ├── 1.2.1.6_ECMP_100G.robot
+│   │   │   ├── 1.2.1.7_Bundle_Load_Balancing.robot
+│   │   │   ├── 1.2.1.8_Bundle_Load_Balancing.robot
+│   │   │   ├── 1.2.2.1_ISIS_adjacencies_and_database_check.robot
+│   │   │   ├── 1.2.2.2_ISIS_Link_Authentication.robot
+│   │   │   ├── 1.2.2.3_ISIS_Single_Topology.robot
+│   │   │   ├── 1.2.3.1_MPLS_LDP_Operation.robot
+│   │   │   ├── 1.2.3.2_MPLS_LDP_IGP_Sync.robot
+│   │   │   ├── 1.2.4.1_MP-BGP_Operation.robot
+│   │   │   ├── 1.2.4.3_BGP_MD5_Authentication.robot
+│   │   │   ├── 2.2.1.3_Netflow_MPLS.robot
+│   │   │   ├── 2.2.1.4_ECMP_100G.robot
+│   │   │   ├── 2.2.1.5_ECMP_100G.robot
+│   │   │   ├── 2.2.1.6_Bundle_Load_Balancing.robot
+│   │   │   └── 2.2.1.7_Bundle_Load_Balancing.robot
+│   │   ├── 1.4_Network_Services
+│   │   │   ├── 1.4.1.1_L3VPN_Operation.robot
+│   │   │   ├── 1.4.1.2_L3VPN_Operation_with_static_PE_CE.robot
+│   │   │   ├── 1.4.1.3_L3VPN_PE_CE_eBGP_BFD_Operation.robot
+│   │   │   ├── 1.4.2.1_L2VPN_P2P_PW_Port_Mode_Untagged_Traffic.robot
+│   │   │   ├── 1.4.2.2_L2VPN_P2P_PW_Port_Mode_802.1Q_single_tagged_Traffic.robot
+│   │   │   ├── 1.4.2.3_L2VPN_P2P_PW_Port_Mode_802.1Q_double_tagged_Traffic.robot
+│   │   │   ├── 1.4.2.5_L2VPN_P2P_PW_Port_Mode_with_RSVP_TE_strict_path_exclude_address_option_Untagged_Traffic.robot
+│   │   │   ├── 1.4.2.7_L2VPN_P2P_PW_Port_Mode_with_RSVP_TE_strict_path_next_address_option_Untagged_Traffic.robot
+│   │   │   ├── 1.4.2.9_L2VPN_P2P_PW_VLAN_Mode_802.1Q_single_tagged_Traffic.robot
+│   │   │   ├── 1.4.2.10_L2VPN_P2P_PW_VLAN_Mode_802.1Q_double_tagged_Traffic.robot
+│   │   │   ├── 1.4.2.13_L2VPN_EVPN_VPWS.robot
+│   │   │   └── 1.4.2.14_L2VPN_EVPN_Native.robot
+│   │   ├── 1.5_Resiliency_and_HA
+│   │   │   ├── 1.5.1.1_OIR_of_Active_RSP.robot
+│   │   │   ├── 1.5.1.2_OIR_of_Standby_RSP.robot
+│   │   │   ├── 1.5.1.3_RSP_Switchover.robot
+│   │   │   ├── 1.5.2.1_ISIS_Process_Crash.robot
+│   │   │   ├── 1.5.2.2_LDP_Process_Crash.robot
+│   │   │   ├── 1.5.2.3_BGP_Process_Crash.robot
+│   │   │   ├── 1.5.3.1_OIR_of_LC.robot
+│   │   │   ├── 1.5.3.2_OIR_of_LC.robot
+│   │   │   ├── 1.5.3.3_OIR_of_LC.robot
+│   │   │   ├── 1.5.3.5_OIR_of_PSU.robot
+│   │   │   ├── 1.5.4.1_Reload_of_LC.robot
+│   │   │   ├── 1.5.4.2_Reload_of_LC.robot
+│   │   │   ├── 1.5.4.3_Reload_of_LC.robot
+│   │   │   ├── 1.5.5.3_OIR_10G_Optic_with_traffic_blackholing.robot
+│   │   │   ├── 1.5.5.9_OIR_100G_Optic.robot
+│   │   │   ├── 1.5.5.11_OIR_400G_Optic.robot
+│   │   │   ├── 2.5.1.3_RSP_Switchover.robot
+│   │   │   ├── 2.5.2.1_ISIS_Process_Crash.robot
+│   │   │   ├── 2.5.2.2_LDP_Process_Crash.robot
+│   │   │   ├── 2.5.4.1_Reload_of_LC.robot
+│   │   │   ├── 2.5.4.2_Reload_of_LC.robot
+│   │   │   └── 2.5.4.3_Reload_of_LC.robot
+│   │   ├── 1.6_Service_Availability
+│   │   │   ├── 1.6.1.1_Physical_Core_Link_Failure_CLI_Shutdown.robot
+│   │   │   ├── 1.6.1.2_Bundle_Member_and_Full_Link_Failure_CLI_Shutdown.robot
+│   │   │   ├── 1.6.1.4_Bundle_Member_Link_Failure_CLI_Shutdown.robot
+│   │   │   ├── 1.6.2.1_Node_Failure_CLI_Reload.robot
+│   │   │   ├── 2.6.1.1_Physical_Core_Link_Failure_CLI_Shutdown.robot
+│   │   │   ├── 2.6.1.2_Bundle_Member_and_Full_Link_Failure_CLI_Shutdown.robot
+│   │   │   ├── 2.6.1.4_Bundle_Member_Link_Failure_CLI_Shutdown.robot
+│   │   │   └── 2.6.2.1_Node_Failure_CLI_Reload.robot
+│   │   └── 1.7_Stability
+│   │       ├── 1.7.1.1_Stability_Test.robot
+│   │       └── 2.7.1.1_Stability_Test.robot
+└── resources
+    ├── CX_Baseline_Robot
+    │   ├── cx_baseline_robot.resource
+    │   ├── keywords
+    │   │   ├── _checks.resource
+    │   │   ├── _setup.resource
+    │   │   ├── _teardown.resource
+    │   │   ├── baseline_bfd.resource
+    │   │   ├── baseline_bgp.resource
+    │   │   ├── baseline_cdp.resource
+    │   │   ├── baseline_configuration.resource
+    │   │   ├── baseline_cpu.resource
+    │   │   ├── baseline_hardware.resource
+    │   │   ├── baseline_interfaces.resource
+    │   │   ├── baseline_isis.resource
+    │   │   ├── baseline_l2vpn.resource
+    │   │   ├── baseline_ldp.resource
+    │   │   ├── baseline_logs.resource
+    │   │   ├── baseline_memory.resource
+    │   │   ├── baseline_mpls_te.resource
+    │   │   ├── baseline_multicast.resource
+    │   │   ├── baseline_ospf.resource
+    │   │   ├── baseline_route_scale.resource
+    │   │   ├── baseline_software.resource
+    │   │   ├── baseline_srte.resource
+    │   │   ├── sdwan
+    │   │   │   ├── _sdwan_checks.resource
+    │   │   │   ├── _sdwan_setup.resource
+    │   │   │   ├── _sdwan_teardown.resource
+    │   │   │   ├── sdwan_baseline_certificate.resource
+    │   │   │   ├── sdwan_baseline_configuration.resource
+    │   │   │   ├── sdwan_baseline_control_connections.resource
+    │   │   │   └── sdwan_baseline_omp.resource
+    │   │   └── temp
+    │   │       ├── GetParsedNew.py
+    │   │       └── YamlPathNew.py
+    │   └── textfsm
+    │       ├── sdwan
+    │       │   ├── viptelaOS_sdwan_show_certificate_root_ca_cert.textfsm
+    │       │   ├── viptelaOS_sdwan_show_control_connections.textfsm
+    │       │   ├── viptelaOS_sdwan_show_omp_peers.textfsm
+    │       │   ├── viptelaOS_sdwan_show_orchestrator_connections.textfsm
+    │       │   ├── xe_cml_sdwan_show_sdwan_control_connections.textfsm
+    │       │   ├── xe_sdwan_show_sdwan_certificate_root_ca_cert.textfsm
+    │       │   ├── xe_sdwan_show_sdwan_control_connections.textfsm
+    │       │   └── xe_sdwan_show_sdwan_omp_peers.textfsm
+    │       ├── show_inventory.textfsm
+    │       ├── textfsm.resource
+    │       ├── xe_show_ip_route_summary.textfsm
+    │       ├── xe_show_ipv6_route_summary.textfsm
+    │       ├── xe_show_isis_neighbors.textfsm
+    │       ├── xe_show_run_router_bgp.textfsm
+    │       ├── xr_show_bgp_all_summary.textfsm
+    │       ├── xr_show_bgp_scale.textfsm
+    │       ├── xr_show_bgp_summary.textfsm
+    │       ├── xr_show_bgp_vrf_summary.textfsm
+    │       ├── xr_show_configuration_commit_list.textfsm
+    │       ├── xr_show_mpls_ldp_neighbor_brief.textfsm
+    │       ├── xr_show_route_vrf_summary.textfsm
+    │       └── xr_show_run_router_bgp.textfsm
+    ├── CX_SP_Robot
+    │   ├── cx_sp_robot.resource
+    │   ├── keywords
+    │   │   ├── iosxr
+    │   │   │   ├── compare_resources
+    │   │   │   │   ├── compare_Parsed.py
+    │   │   │   │   └── iosxr_compare_parsed.yaml
+    │   │   │   ├── iosxr_bfd.resource
+    │   │   │   ├── iosxr_bgp.resource
+    │   │   │   ├── iosxr_cdp.resource
+    │   │   │   ├── iosxr_clock.resource
+    │   │   │   ├── iosxr_compare_parsed.resource
+    │   │   │   ├── iosxr_configure.resource
+    │   │   │   ├── iosxr_get_parsed.resource
+    │   │   │   ├── iosxr_hardware.resource
+    │   │   │   ├── iosxr_hsrp.resource
+    │   │   │   ├── iosxr_interface.resource
+    │   │   │   ├── iosxr_isis.resource
+    │   │   │   ├── iosxr_l2vpn.resource
+    │   │   │   ├── iosxr_lldp.resource
+    │   │   │   ├── iosxr_mpls_ldp.resource
+    │   │   │   ├── iosxr_mpls_te.resource
+    │   │   │   ├── iosxr_ping.resource
+    │   │   │   ├── iosxr_process.resource
+    │   │   │   ├── iosxr_srte.resource
+    │   │   │   ├── iosxr_trigger.resource
+    │   │   │   └── python
+    │   │   │       └── ReadBufferNew.py
+    │   │   └── sp_utility.resource
+    │   └── textfsm
+    │       ├── show_inventory.textfsm
+    │       ├── textfsm.resource
+    │       ├── xe_show_ip_route_summary.textfsm
+    │       ├── xe_show_ipv6_route_summary.textfsm
+    │       ├── xe_show_isis_neighbors.textfsm
+    │       ├── xr_show_bgp_summary.textfsm
+    │       ├── xr_show_bgp_vrf_summary.textfsm
+    │       ├── xr_show_configuration_commit_list.textfsm
+    │       ├── xr_show_mpls_ldp_neighbor_brief.textfsm
+    │       ├── xr_show_nv_satellite_status_brief.textfsm
+    │       ├── xr_show_ospf_vrf_neighbor.textfsm
+    │       ├── xr_show_pim_neighbor.textfsm
+    │       ├── xr_show_pim_vrf_neighbor.textfsm
+    │       ├── xr_show_route_vrf_summary.textfsm
+    │       └── xr_show_srte_policy_tabular.textfsm
+    ├── CX_Utility_Robot
+    │   ├── README.md
+    │   ├── cx_utility_robot.resource
+    │   ├── keywords
+    │   │   ├── linux
+    │   │   │   └── linux.resource
+    │   │   ├── other
+    │   │   │   ├── config.resource
+    │   │   │   ├── console.resource
+    │   │   │   ├── console_py
+    │   │   │   │   └── UtilityReadBufferNew.py
+    │   │   │   ├── cxlabs.resource
+    │   │   │   ├── cxtm.resource
+    │   │   │   ├── device_connections.resource
+    │   │   │   ├── other.resource
+    │   │   │   ├── test_conditions.resource
+    │   │   │   ├── test_setup.resource
+    │   │   │   └── test_teardown.resource
+    │   │   ├── stacks
+    │   │   │   ├── stacks_snmp.resource
+    │   │   │   ├── stacks_syslog.resource
+    │   │   │   └── stacks_tacacs.resource
+    │   │   └── traffic
+    │   │       ├── iperf.resource
+    │   │       ├── ixia.resource
+    │   │       ├── ixia_py
+    │   │       │   ├── IxiaAnalyse.py
+    │   │       │   ├── charter_Ixia.py
+    │   │       │   └── custom_API_IXIA_Keyword.py
+    │   │       ├── spirent.resource
+    │   │       └── trex.resource
+    │   └── textfsm
+    │       ├── snmp_traps.textfsm
+    │       ├── syslogs.textfsm
+    │       ├── tacacs.textfsm
+    │       └── textfsm.resource
+    └── project.resource
+

@@ -5,7 +5,6 @@ class CommonSetup(aetest.CommonSetup):
 
     @aetest.subsection
     def connect(self, testbed):
-        # connect to all testbed devices
         testbed.devices.r1.connect()
         self.parent.parameters['uut'] = testbed.devices.r1
 

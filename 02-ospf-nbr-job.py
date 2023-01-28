@@ -1,6 +1,6 @@
 # run this file with
 #
-#   pyats run job pyats-sample-job.py --testbed-file testbed.yaml
+#   pyats run job 02-ospf-nbr-job.py --testbed-file testbed.yaml
 
 # see https://pubhub.devnetcloud.com/media/pyats/docs/easypy/jobfile.html
 # for how job files work
@@ -16,5 +16,5 @@ def main(runtime):
     '''job file entrypoint'''
 
     # run script
-    run(testscript=os.path.join(SCRIPT_PATH, 'pyats-sample-script.py'),
+    run(testscript=os.path.join(SCRIPT_PATH, '02-ospf-nbr-script.py'),
         runtime=runtime)

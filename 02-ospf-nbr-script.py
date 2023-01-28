@@ -19,7 +19,7 @@ class VerifyOspfNeighbors(aetest.Testcase):
         if neighbor_rid != '10.0.0.2':
             self.failed(f'Neighbor router id {neighbor_rid} is unexpected')
         neighbor_state = output.q.contains('neighbors').get_values('state')[0]
-        if neighbor_state not in ['fulld']:
+        if neighbor_state != 'full':
             self.failed(f'Neighbor state {neighbor_state} is unexpected')
         self.passed(f'Neighbor router {neighbor_rid} and state {neighbor_state} as expected')
 

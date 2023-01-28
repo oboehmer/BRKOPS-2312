@@ -1,0 +1,19 @@
+# pyats Genie Blitz example
+#
+# run this via
+#
+#   pyats run genie --trigger-datafile 03-ospf-nbr-blitz.yaml --trigger-uids "Or('TestOpsfNeighbors')" --testbed-file testbed.yaml
+
+TestOpsfNeighbors:
+    source:
+      pkg: genie.libs.sdk
+      class: triggers.blitz.blitz.Blitz
+
+    test_sections:
+        - test_ospf_neighbors:
+            - parse:
+                device: r1
+                command: show ip ospf neighbor GigabitEthernet2 detail
+                include:
+                - contains('neighbors').contains('10.0.0.2').contains_key_value('neighbor_router_id', '10.0.0.2')
+                - contains('neighbors').contains('10.0.0.21').contains_key_value('state', 'full') 

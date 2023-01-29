@@ -4,6 +4,8 @@ testbed:
       username: cldemo
       password: "%ENV{DEVICE_PASSWORD}"
 
+# Please note that the device name in this file (i.e. r1, r2, etc. in below example)
+# need to match the actual hostname configured on the device!!!
 devices:
   r1:
     type: router

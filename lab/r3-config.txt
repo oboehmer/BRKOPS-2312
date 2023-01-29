@@ -1,0 +1,80 @@
+
+
+Sun Jan 29 15:32:16.818 UTC
+Building configuration...
+!! IOS XR Configuration 6.3.1
+!! Last configuration change at Sun Jan 29 09:18:47 2023 by cisco
+!
+hostname r3
+logging console disable
+address-family ipv4 unicast
+!
+line console
+ exec-timeout 0 0
+ absolute-timeout 0
+ session-timeout 0
+!
+line default
+ exec-timeout 0 0
+ absolute-timeout 0
+ session-timeout 0
+!
+ipv4 access-list deny_all
+ 10 deny ipv4 any any
+!
+interface Loopback0
+ ipv4 address 10.0.0.3 255.255.255.255
+ ipv6 address fd00::3/128
+!
+interface MgmtEth0/0/CPU0/0
+ ipv4 address 10.12.63.13 255.255.255.0
+!
+interface GigabitEthernet0/0/0/0
+ ipv4 address 172.16.23.3 255.255.255.0
+ ipv6 address fd00:a:a:23::3/64
+!
+interface GigabitEthernet0/0/0/1
+ ipv4 address 172.16.13.3 255.255.255.0
+ ipv6 address fd00:a:a:13::3/64
+!
+interface GigabitEthernet0/0/0/2
+ shutdown
+!
+route-policy static2ospf
+  if destination in (10.0.0.0/8 le 32) then
+    pass
+  endif
+end-policy
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 10.12.63.1
+ !
+!
+router ospf 1
+ redistribute static route-policy static2ospf
+ address-family ipv4 unicast
+ area 0
+  interface Loopback0
+   passive enable
+  !
+  interface GigabitEthernet0/0/0/0
+  !
+  interface GigabitEthernet0/0/0/1
+  !
+ !
+!
+router ospfv3 1
+ area 0
+  interface Loopback0
+   passive
+  !
+  interface GigabitEthernet0/0/0/0
+  !
+  interface GigabitEthernet0/0/0/1
+  !
+ !
+!
+ssh server v2
+end
+

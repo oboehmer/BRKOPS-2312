@@ -2,9 +2,9 @@
 #
 # run this via
 #
-#   pyats run genie --trigger-datafile 03-ospf-nbr-blitz.yaml --trigger-uids "Or('TestOpsfNeighbors')" --testbed-file testbed.yaml
+#   pyats run genie --trigger-datafile 03-ospf-nbr-blitz.yaml --trigger-uids "Or('TestOspfNeighbors')" --testbed-file testbed.yaml
 
-TestOpsfNeighbors:
+TestOspfNeighbors:
   source:
     pkg: genie.libs.sdk
     class: triggers.blitz.blitz.Blitz

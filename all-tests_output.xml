@@ -1,0 +1,2977 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.1 (Python 3.9.16 on linux)" generated="20230205 07:02:19.827" rpa="false" schemaversion="3">
+<suite id="s1" name="CiscoLive-Demo">
+<suite id="s1-s1" name="01-Ospf-Nbr" source="/tests/01-ospf-nbr.robot">
+<kw name="setup test environment" type="SETUP">
+<kw name="use testbed &quot;testbed.yaml&quot;" library="pyats.robot.pyATSRobot" sourcename="use testbed &quot;${testbed}&quot;">
+<doc>Load testbed YAML file and instantiate testbed object</doc>
+<status status="PASS" starttime="20230205 07:02:20.871" endtime="20230205 07:02:20.921"/>
+</kw>
+<kw name="connect to device &quot;r1&quot;" library="pyats.robot.pyATSRobot" sourcename="connect to device &quot;${device:[^&quot;]+}&quot;">
+<doc>Connect to device connection as defined in testbed.yaml</doc>
+<msg timestamp="20230205 07:02:20.922" level="INFO">Connecting to device 'Device r1'</msg>
+<msg timestamp="20230205 07:02:20.922" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:02:28.221" level="INFO">2023-02-05 07:02:20,926: %UNICON-INFO: +++ r1 logfile /tmp/r1-cli-20230205T070220925.log +++
+
+2023-02-05 07:02:20,926: %UNICON-INFO: +++ Unicon plugin iosxe (unicon.plugins.iosxe) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:02:21,490: %UNICON-INFO: +++ connection to spawn: ssh -l cldemo 10.12.63.11, id: 139876811346464 +++
+
+2023-02-05 07:02:21,490: %UNICON-INFO: connection to r1
+Warning: Permanently added '10.12.63.11' (RSA) to the list of known hosts.
+(cldemo@10.12.63.11) Password: 
+
+
+
+r1#
+
+2023-02-05 07:02:24,294: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:02:24,360: %UNICON-INFO: +++ r1 with via 'cli': executing command 'term length 0' +++
+term length 0
+r1#
+
+2023-02-05 07:02:24,802: %UNICON-INFO: +++ r1 with via 'cli': executing command 'term width 0' +++
+term width 0
+r1#
+
+2023-02-05 07:02:25,294: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 17.03.04a
+Cisco IOS Software [Amsterdam], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.3.4a, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Tue 20-Jul-21 04:59 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2021 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+r1 uptime is 1 week, 2 days, 14 hours, 45 minutes
+Uptime for this control processor is 1 week, 2 days, 14 hours, 47 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: reload
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+The current throughput level is 1000 kbps 
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1105173K/3075K bytes of memory.
+Processor board ID 9JDNJR1SDGA
+Router operating mode: Autonomous
+4 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3012216K bytes of physical memory.
+6188032K bytes of virtual hard disk at bootflash:.
+
+Configuration register is 0x2102
+
+r1#
+
+2023-02-05 07:02:25,732: %UNICON-INFO: +++ r1 with via 'cli': configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+r1(config)#no logging console
+r1(config)#line console 0
+r1(config-line)#exec-timeout 0
+r1(config-line)#line vty 0 4
+r1(config-line)#exec-timeout 0
+r1(config-line)#end
+r1#</msg>
+<status status="PASS" starttime="20230205 07:02:20.921" endtime="20230205 07:02:28.222"/>
+</kw>
+<status status="PASS" starttime="20230205 07:02:20.871" endtime="20230205 07:02:28.222"/>
+</kw>
+<test id="s1-s1-t1" name="Verify OSPF Neighbor" line="8">
+<kw name="parse &quot;show ip ospf neighbor GigabitEthernet2 detail&quot; on device &quot;r1&quot;" library="genie.libs.robot.GenieRobot" sourcename="parse &quot;${parser:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<var>${result}</var>
+<doc>Call any `metaparser` parser and parse the device output.</doc>
+<msg timestamp="20230205 07:02:31.588" level="INFO">2023-02-05 07:02:28,966: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf neighbor GigabitEthernet2 detail' +++
+show ip ospf neighbor GigabitEthernet2 detail
+ Neighbor 10.0.0.2, interface address 172.16.12.2, interface-id 8
+    In the area 0 via interface GigabitEthernet2
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.12.2 BDR is 172.16.12.1
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:11
+    Neighbor is up for 1w0d    
+    Index 1/1/1, retransmission queue length 0, number of retransmission 0
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 0, maximum is 0
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+r1#
+
+2023-02-05 07:02:29,852: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf interface GigabitEthernet2' +++
+show ip ospf interface GigabitEthernet2
+GigabitEthernet2 is up, line protocol is up 
+  Internet Address 172.16.12.1/24, Interface ID 8, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.1, Network Type BROADCAST, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State BDR, Priority 1
+  Designated Router (ID) 10.0.0.2, Interface address 172.16.12.2
+  Backup Designated router (ID) 10.0.0.1, Interface address 172.16.12.1
+  Timer intervals configured, Hello 3, Dead 12, Wait 12, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:00
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 2, maximum is 3
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.2  (Designated Router)
+  Suppress hello for 0 neighbor(s)
+r1#
+
+2023-02-05 07:02:30,676: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r1#</msg>
+<msg timestamp="20230205 07:02:31.588" level="INFO">${result} = {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'areas': {'0.0.0.0': {'interfaces': {'GigabitEthernet2': {'neighbors': {'10.0.0.2': {'neighbor_router_id': '10.0.0.2', 'interface': ...</msg>
+<status status="PASS" starttime="20230205 07:02:28.223" endtime="20230205 07:02:31.589"/>
+</kw>
+<kw name="check neighbor id">
+<arg>${result}</arg>
+<arg>10.0.0.2</arg>
+<kw name="dq query" library="genie.libs.robot.GenieRobot">
+<var>${nbr_id}</var>
+<arg>data=${result}</arg>
+<arg>filters=contains('neighbors').get_values('neighbor_router_id')</arg>
+<doc>Search dictionary using Dq filters</doc>
+<msg timestamp="20230205 07:02:31.593" level="INFO">${nbr_id} = ['10.0.0.2']</msg>
+<status status="PASS" starttime="20230205 07:02:31.592" endtime="20230205 07:02:31.593"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${nbr_id}[0]</arg>
+<arg>${id}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230205 07:02:31.593" endtime="20230205 07:02:31.594"/>
+</kw>
+<status status="PASS" starttime="20230205 07:02:31.591" endtime="20230205 07:02:31.594"/>
+</kw>
+<kw name="check neighbor state">
+<arg>${result}</arg>
+<arg>full</arg>
+<kw name="dq query" library="genie.libs.robot.GenieRobot">
+<var>${nbr_state}</var>
+<arg>data=${result}</arg>
+<arg>filters=contains('neighbors').get_values('state')</arg>
+<doc>Search dictionary using Dq filters</doc>
+<msg timestamp="20230205 07:02:31.596" level="INFO">${nbr_state} = ['full']</msg>
+<status status="PASS" starttime="20230205 07:02:31.595" endtime="20230205 07:02:31.596"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${nbr_state}[0]</arg>
+<arg>${state}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230205 07:02:31.597" endtime="20230205 07:02:31.597"/>
+</kw>
+<status status="PASS" starttime="20230205 07:02:31.594" endtime="20230205 07:02:31.597"/>
+</kw>
+<status status="PASS" starttime="20230205 07:02:28.222" endtime="20230205 07:02:31.598"/>
+</test>
+<status status="PASS" starttime="20230205 07:02:19.849" endtime="20230205 07:02:31.598"/>
+</suite>
+<suite id="s1-s2" name="04-Genie-Learn" source="/tests/04-genie-learn.robot">
+<kw name="Run Keywords" library="BuiltIn" type="SETUP">
+<arg>use testbed "testbed.yaml"</arg>
+<arg>AND</arg>
+<arg>connect to all devices</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="use testbed &quot;testbed.yaml&quot;" library="pyats.robot.pyATSRobot" sourcename="use testbed &quot;${testbed}&quot;">
+<doc>Load testbed YAML file and instantiate testbed object</doc>
+<status status="PASS" starttime="20230205 07:02:31.626" endtime="20230205 07:02:31.647"/>
+</kw>
+<kw name="connect to all devices" library="pyats.robot.pyATSRobot">
+<doc>Connect to all devices</doc>
+<msg timestamp="20230205 07:02:31.648" level="INFO">Connecting to device 'Device r1'</msg>
+<msg timestamp="20230205 07:02:31.648" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:02:38.537" level="INFO">Connecting to device 'Device r2'</msg>
+<msg timestamp="20230205 07:02:38.538" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:02:45.156" level="INFO">Connecting to device 'Device r3'</msg>
+<msg timestamp="20230205 07:02:45.156" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:02:55.354" level="INFO">2023-02-05 07:02:31,649: %UNICON-INFO: +++ r1 logfile /tmp/r1-cli-20230205T070231649.log +++
+
+2023-02-05 07:02:31,649: %UNICON-INFO: +++ Unicon plugin iosxe (unicon.plugins.iosxe) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:02:32,090: %UNICON-INFO: +++ connection to spawn: ssh -l cldemo 10.12.63.11, id: 139876731743920 +++
+
+2023-02-05 07:02:32,090: %UNICON-INFO: connection to r1
+Warning: Permanently added '10.12.63.11' (RSA) to the list of known hosts.
+(cldemo@10.12.63.11) Password: 
+
+
+
+r1#
+
+2023-02-05 07:02:34,498: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:02:34,563: %UNICON-INFO: +++ r1 with via 'cli': executing command 'term length 0' +++
+term length 0
+r1#
+
+2023-02-05 07:02:35,024: %UNICON-INFO: +++ r1 with via 'cli': executing command 'term width 0' +++
+term width 0
+r1#
+
+2023-02-05 07:02:35,525: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 17.03.04a
+Cisco IOS Software [Amsterdam], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.3.4a, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Tue 20-Jul-21 04:59 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2021 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+r1 uptime is 1 week, 2 days, 14 hours, 46 minutes
+Uptime for this control processor is 1 week, 2 days, 14 hours, 47 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: reload
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+The current throughput level is 1000 kbps 
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1105173K/3075K bytes of memory.
+Processor board ID 9JDNJR1SDGA
+Router operating mode: Autonomous
+4 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3012216K bytes of physical memory.
+6188032K bytes of virtual hard disk at bootflash:.
+
+Configuration register is 0x2102
+
+r1#
+
+2023-02-05 07:02:35,971: %UNICON-INFO: +++ r1 with via 'cli': configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+r1(config)#no logging console
+r1(config)#line console 0
+r1(config-line)#exec-timeout 0
+r1(config-line)#line vty 0 4
+r1(config-line)#exec-timeout 0
+r1(config-line)#end
+r1#
+
+2023-02-05 07:02:38,540: %UNICON-INFO: +++ r2 logfile /tmp/r2-cli-20230205T070238539.log +++
+
+2023-02-05 07:02:38,540: %UNICON-INFO: +++ Unicon plugin iosxe (unicon.plugins.iosxe) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:02:38,958: %UNICON-INFO: +++ connection to spawn: ssh -l cldemo 10.12.63.12, id: 139876732688752 +++
+
+2023-02-05 07:02:38,958: %UNICON-INFO: connection to r2
+Warning: Permanently added '10.12.63.12' (RSA) to the list of known hosts.
+(cldemo@10.12.63.12) Password: 
+
+
+
+r2#
+
+2023-02-05 07:02:41,258: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:02:41,324: %UNICON-INFO: +++ r2 with via 'cli': executing command 'term length 0' +++
+term length 0
+r2#
+
+2023-02-05 07:02:41,783: %UNICON-INFO: +++ r2 with via 'cli': executing command 'term width 0' +++
+term width 0
+r2#
+
+2023-02-05 07:02:42,300: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 17.03.04a
+Cisco IOS Software [Amsterdam], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.3.4a, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Tue 20-Jul-21 04:59 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2021 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+r2 uptime is 1 week, 2 days, 20 hours, 49 minutes
+Uptime for this control processor is 1 week, 2 days, 20 hours, 52 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: factory-reset
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+The current throughput level is 1000 kbps 
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1105173K/3075K bytes of memory.
+Processor board ID 98QLAOEIBMM
+Router operating mode: Autonomous
+4 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3012224K bytes of physical memory.
+6188032K bytes of virtual hard disk at bootflash:.
+
+Configuration register is 0x2102
+
+r2#
+
+2023-02-05 07:02:42,718: %UNICON-INFO: +++ r2 with via 'cli': configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+r2(config)#no logging console
+r2(config)#line console 0
+r2(config-line)#exec-timeout 0
+r2(config-line)#line vty 0 4
+r2(config-line)#exec-timeout 0
+r2(config-line)#end
+r2#
+
+2023-02-05 07:02:45,158: %UNICON-INFO: +++ r3 logfile /tmp/r3-cli-20230205T070245157.log +++
+
+2023-02-05 07:02:45,158: %UNICON-INFO: +++ Unicon plugin iosxr (unicon.plugins.iosxr) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:02:45,707: %UNICON-INFO: +++ connection to spawn: ssh -l cisco 10.12.63.13, id: 139876731892256 +++
+
+2023-02-05 07:02:45,707: %UNICON-INFO: connection to r3
+Warning: Permanently added '10.12.63.13' (RSA) to the list of known hosts.
+
+
+
+IMPORTANT:  READ CAREFULLY
+Welcome to the Demo Version of Cisco IOS XRv (the "Software").
+The Software is subject to and governed by the terms and conditions
+of the End User License Agreement and the Supplemental End User
+License Agreement accompanying the product, made available at the
+time of your order, or posted on the Cisco website at
+www.cisco.com/go/terms (collectively, the "Agreement").
+As set forth more fully in the Agreement, use of the Software is
+strictly limited to internal use in a non-production environment
+solely for demonstration and evaluation purposes.  Downloading,
+installing, or using the Software constitutes acceptance of the
+Agreement, and you are binding yourself and the business entity
+that you represent to the Agreement.  If you do not agree to all
+of the terms of the Agreement, then Cisco is unwilling to license
+the Software to you and (a) you may not download, install or use the
+Software, and (b) you may return the Software as more fully set forth
+in the Agreement.
+
+
+Please login with any configured user/password, or cisco/cisco
+
+
+(cisco@10.12.63.13) Password: 
+
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:02:49,802: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:02:49,866: %UNICON-INFO: +++ r3 with via 'cli': executing command 'terminal length 0' +++
+terminal length 0
+Sun Feb  5 07:02:15.552 UTC
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:02:50,531: %UNICON-INFO: +++ r3 with via 'cli': executing command 'terminal width 0' +++
+terminal width 0
+Sun Feb  5 07:02:16.132 UTC
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:02:50,901: %UNICON-INFO: +++ r3 with via 'cli': configure +++
+configure terminal
+Sun Feb  5 07:02:16.562 UTC
+RP/0/0/CPU0:r3(config)#no logging console
+RP/0/0/CPU0:r3(config)#logging console disable
+RP/0/0/CPU0:r3(config)#line console
+RP/0/0/CPU0:r3(config-line)#exec-timeout 0 0
+RP/0/0/CPU0:r3(config-line)#absolute-timeout 0
+RP/0/0/CPU0:r3(config-line)#session-timeout 0
+RP/0/0/CPU0:r3(config-line)#line default
+RP/0/0/CPU0:r3(config-line)#exec-timeout 0 0
+RP/0/0/CPU0:r3(config-line)#absolute-timeout 0
+RP/0/0/CPU0:r3(config-line)#session-timeout 0
+RP/0/0/CPU0:r3(config-line)#commit
+Sun Feb  5 07:02:19.852 UTC
+RP/0/0/CPU0:r3(config-line)#end
+RP/0/0/CPU0:r3#</msg>
+<status status="PASS" starttime="20230205 07:02:31.647" endtime="20230205 07:02:55.360"/>
+</kw>
+<status status="PASS" starttime="20230205 07:02:31.626" endtime="20230205 07:02:55.360"/>
+</kw>
+<test id="s1-s2-t1" name="Verify OSPF hello intervals" line="13">
+<for flavor="IN">
+<var>${device}</var>
+<value>@{DEVICES}</value>
+<iter>
+<var name="${device}">r1</var>
+<kw name="learn OSPF on device">
+<var>${model}</var>
+<arg>${device}</arg>
+<kw name="learn &quot;ospf&quot; on device &quot;${device}&quot;" library="genie.libs.robot.GenieRobot" sourcename="learn &quot;${feature:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<var>${result}</var>
+<doc>Learn Ops feature on device</doc>
+<msg timestamp="20230205 07:03:04.392" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfVirtualLinks'&gt;
+Show Command: show ip ospf virtual-links
+Parser Output is empty</msg>
+<msg timestamp="20230205 07:03:12.587" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfShamLinks'&gt;
+Show Command: show ip ospf sham-links
+Parser Output is empty</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">| Commands for learning feature 'Ospf'                                                                                                               |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspf'&gt;                                                                                      |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_protocols.ShowIpProtocols'&gt;, arguments: {'vrf':''}                                                     |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfMplsLdpInterface'&gt;, arguments: {'interface':''}                                         |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfMplsTrafficEngLink'&gt;                                                                    |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseRouter'&gt;                                                                        |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseNetwork'&gt;                                                                       |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseExternal'&gt;                                                                      |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseSummary'&gt;                                                                       |</msg>
+<msg timestamp="20230205 07:03:12.588" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseOpaqueArea'&gt;                                                                    |</msg>
+<msg timestamp="20230205 07:03:12.589" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfInterface'&gt;, arguments: {'interface':''}                                                |</msg>
+<msg timestamp="20230205 07:03:12.589" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfNeighborDetail'&gt;, arguments: {'neighbor':''}                                            |</msg>
+<msg timestamp="20230205 07:03:12.589" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20230205 07:03:12.589" level="INFO">| - Commands with empty output                                                                                                                       |</msg>
+<msg timestamp="20230205 07:03:12.589" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20230205 07:03:12.589" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfVirtualLinks'&gt;                                                                          |</msg>
+<msg timestamp="20230205 07:03:12.589" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfShamLinks'&gt;                                                                             |</msg>
+<msg timestamp="20230205 07:03:12.589" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20230205 07:03:12.721" level="INFO">2023-02-05 07:02:55,963: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf' +++
+show ip ospf
+ Routing Process "ospf 1" with ID 10.0.0.1
+ Start time: 00:02:06.353, Time elapsed: 1w2d
+ Supports only single TOS(TOS0) routes
+ Supports opaque LSA
+ Supports Link-local Signaling (LLS)
+ Supports area transit capability
+ Supports NSSA (compatible with RFC 3101)
+ Supports Database Exchange Summary List Optimization (RFC 5243)
+ Event-log enabled, Maximum number of events: 1000, Mode: cyclic
+ Router is not originating router-LSAs with maximum metric
+ Initial SPF schedule delay 50 msecs
+ Minimum hold time between two consecutive SPFs 200 msecs
+ Maximum wait time between two consecutive SPFs 5000 msecs
+ Incremental-SPF disabled
+ Initial LSA throttle delay 50 msecs
+ Minimum hold time for LSA throttle 200 msecs
+ Maximum wait time for LSA throttle 5000 msecs
+ Minimum LSA arrival 100 msecs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ EXCHANGE/LOADING adjacency limit: initial 300, process maximum 300
+ Number of external LSA 0. Checksum Sum 0x000000
+ Number of opaque AS LSA 0. Checksum Sum 0x000000
+ Number of DCbitless external and opaque AS LSA 0
+ Number of DoNotAge external and opaque AS LSA 0
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Number of areas transit capable is 0
+ External flood list length 0
+ IETF NSF helper support enabled
+ Cisco NSF helper support enabled
+ Reference bandwidth unit is 100 mbps
+    Area BACKBONE(0)
+        Number of interfaces in this area is 3 (1 loopback)
+	Area has no authentication
+	SPF algorithm last executed 1w0d ago
+	SPF algorithm executed 57 times
+	Area ranges are
+	Number of LSA 6. Checksum Sum 0x03248D
+	Number of opaque link LSA 0. Checksum Sum 0x000000
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+r1#
+
+2023-02-05 07:02:56,353: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip protocols' +++
+show ip protocols
+*** IP Routing is NSF aware ***
+
+Routing Protocol is "application"
+  Sending updates every 0 seconds
+  Invalid after 0 seconds, hold down 0, flushed after 0
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Maximum path: 32
+  Routing for Networks:
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+  Distance: (default is 4)
+
+Routing Protocol is "ospf 1"
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Router ID 10.0.0.1
+  Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+  Routing on Interfaces Configured Explicitly (Area 0):
+    Loopback0
+    GigabitEthernet3
+    GigabitEthernet2
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    10.0.0.2             110      1w0d
+    10.0.0.3             110      00:11:06
+  Distance: (default is 110)
+
+r1#
+
+2023-02-05 07:02:56,985: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r1#
+
+2023-02-05 07:02:58,085: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf mpls ldp interface' +++
+show ip ospf mpls ldp interface
+Loopback0
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+GigabitEthernet3
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+GigabitEthernet2
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+r1#
+
+2023-02-05 07:02:58,709: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf mpls traffic-eng link' +++
+show ip ospf mpls traffic-eng link
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+
+  Area 0 MPLS TE not initialized
+r1#
+
+2023-02-05 07:02:59,531: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r1#
+
+2023-02-05 07:03:00,459: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf database router' +++
+show ip ospf database router
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+
+		Router Link States (Area 0)
+
+  LS age: 861
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.1
+  Advertising Router: 10.0.0.1
+  LS Seq Number: 800001CD
+  Checksum: 0xA03C
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.1
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.13.1
+     (Link Data) Router Interface address: 172.16.13.1
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 20
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.12.2
+     (Link Data) Router Interface address: 172.16.12.1
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1155
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.2
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 800001B8
+  Checksum: 0xE8EE
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.2
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.23.2
+     (Link Data) Router Interface address: 172.16.23.2
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 20
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.12.2
+     (Link Data) Router Interface address: 172.16.12.2
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1964
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.3
+  Advertising Router: 10.0.0.3
+  LS Seq Number: 800001C1
+  Checksum: 0x835F
+  Length: 60
+  AS Boundary Router
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.3
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.23.2
+     (Link Data) Router Interface address: 172.16.23.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.13.1
+     (Link Data) Router Interface address: 172.16.13.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+
+r1#
+
+2023-02-05 07:03:01,127: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf database network' +++
+show ip ospf database network
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+
+		Net Link States (Area 0)
+
+  LS age: 1407
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.12.2 (address of Designated Router)
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 8000019F
+  Checksum: 0xB1FA
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.2
+	Attached Router: 10.0.0.1
+
+  LS age: 862
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.13.1 (address of Designated Router)
+  Advertising Router: 10.0.0.1
+  LS Seq Number: 80000173
+  Checksum: 0x21B7
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.1
+	Attached Router: 10.0.0.3
+
+  LS age: 1407
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.23.2 (address of Designated Router)
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 800001A7
+  Checksum: 0x4453
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.2
+	Attached Router: 10.0.0.3
+
+r1#
+
+2023-02-05 07:03:01,902: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf database external' +++
+show ip ospf database external
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+r1#
+
+2023-02-05 07:03:02,530: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf database summary' +++
+show ip ospf database summary
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+r1#
+
+2023-02-05 07:03:03,175: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf database opaque-area' +++
+show ip ospf database opaque-area
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+r1#
+
+2023-02-05 07:03:03,826: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf virtual-links' +++
+show ip ospf virtual-links
+r1#
+
+2023-02-05 07:03:04,456: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf interface' +++
+show ip ospf interface
+Loopback0 is up, line protocol is up 
+  Internet Address 10.0.0.1/32, Interface ID 12, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.1, Network Type LOOPBACK, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Loopback interface is treated as a stub Host
+GigabitEthernet3 is up, line protocol is up 
+  Internet Address 172.16.13.1/24, Interface ID 9, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.1, Network Type BROADCAST, Cost: 20
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           20        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 10.0.0.1, Interface address 172.16.13.1
+  Backup Designated router (ID) 10.0.0.3, Interface address 172.16.13.3
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:05
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/3/3, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 2
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.3  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet2 is up, line protocol is up 
+  Internet Address 172.16.12.1/24, Interface ID 8, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.1, Network Type BROADCAST, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State BDR, Priority 1
+  Designated Router (ID) 10.0.0.2, Interface address 172.16.12.2
+  Backup Designated router (ID) 10.0.0.1, Interface address 172.16.12.1
+  Timer intervals configured, Hello 3, Dead 12, Wait 12, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:01
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 2, maximum is 3
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.2  (Designated Router)
+  Suppress hello for 0 neighbor(s)
+r1#
+
+2023-02-05 07:03:05,112: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r1#
+
+2023-02-05 07:03:06,051: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r1#
+
+2023-02-05 07:03:06,979: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r1#
+
+2023-02-05 07:03:07,915: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf neighbor detail' +++
+show ip ospf neighbor detail
+ Neighbor 10.0.0.3, interface address 172.16.13.3, interface-id 4
+    In the area 0 via interface GigabitEthernet3
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.13.1 BDR is 172.16.13.3
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:37
+    Neighbor is up for 1w1d    
+    Index 1/2/2, retransmission queue length 0, number of retransmission 2
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 1, maximum is 1
+    Last retransmission scan time is 1 msec, maximum is 1 msec
+ Neighbor 10.0.0.2, interface address 172.16.12.2, interface-id 8
+    In the area 0 via interface GigabitEthernet2
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.12.2 BDR is 172.16.12.1
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:09
+    Neighbor is up for 1w0d    
+    Index 1/1/1, retransmission queue length 0, number of retransmission 0
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 0, maximum is 0
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+r1#
+
+2023-02-05 07:03:08,547: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf interface GigabitEthernet3' +++
+show ip ospf interface GigabitEthernet3
+GigabitEthernet3 is up, line protocol is up 
+  Internet Address 172.16.13.1/24, Interface ID 9, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.1, Network Type BROADCAST, Cost: 20
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           20        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 10.0.0.1, Interface address 172.16.13.1
+  Backup Designated router (ID) 10.0.0.3, Interface address 172.16.13.3
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:00
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/3/3, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 2
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.3  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+r1#
+
+2023-02-05 07:03:09,531: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r1#
+
+2023-02-05 07:03:10,328: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf interface GigabitEthernet2' +++
+show ip ospf interface GigabitEthernet2
+GigabitEthernet2 is up, line protocol is up 
+  Internet Address 172.16.12.1/24, Interface ID 8, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.1, Network Type BROADCAST, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State BDR, Priority 1
+  Designated Router (ID) 10.0.0.2, Interface address 172.16.12.2
+  Backup Designated router (ID) 10.0.0.1, Interface address 172.16.12.1
+  Timer intervals configured, Hello 3, Dead 12, Wait 12, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:01
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 2, maximum is 3
+  Last flood scan time is 0 msec, maximum is 1 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.2  (Designated Router)
+  Suppress hello for 0 neighbor(s)
+r1#
+
+2023-02-05 07:03:11,093: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r1#
+
+2023-02-05 07:03:12,017: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf sham-links' +++
+show ip ospf sham-links
+r1#</msg>
+<msg timestamp="20230205 07:03:12.726" level="INFO">${result} = &lt;Ospf object at 0x7f3796f4d0d0&gt;</msg>
+<status status="PASS" starttime="20230205 07:02:55.362" endtime="20230205 07:03:12.726"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${qdict}</var>
+<arg>genie.conf.base.utils.QDict($result.to_dict())</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230205 07:03:12.737" level="INFO">${qdict} = {'context_manager': {}, 'attributes': None, 'commands': None, 'connections': None, 'raw_data': False, 'info': {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.1...</msg>
+<status status="PASS" starttime="20230205 07:03:12.727" endtime="20230205 07:03:12.737"/>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<arg>${qdict}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<msg timestamp="20230205 07:03:12.738" level="INFO">Dictionary size is 6 and it contains following items:
+attributes: None
+commands: None
+connections: None
+context_manager: {}
+info: {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.1', 'preference': {'single_value': {'all': 110}}, 'mpls': {'ldp': {'autoconfig': False, 'autoconfig_area_id': '0.0.0.0'}}, 'areas': {'0.0.0.0': {'mpls': {'te': {'enable': False}}, 'database': {'lsa_types': {1: {'lsa_type': 1, 'lsas': {'10.0.0.3 10.0.0.3': {'lsa_id': '10.0.0.3', 'adv_router': '10.0.0.3', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.3', 'age': 1964, 'type': 1, 'adv_router': '10.0.0.3', 'seq_num': '800001C1', 'checksum': '0x835F', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.13.1': {'link_id': '172.16.13.1', 'link_data': '172.16.13.3', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}, '172.16.23.2': {'link_id': '172.16.23.2', 'link_data': '172.16.23.3', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}, '10.0.0.3': {'link_id': '10.0.0.3', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}, '10.0.0.2 10.0.0.2': {'lsa_id': '10.0.0.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.2', 'age': 1155, 'type': 1, 'adv_router': '10.0.0.2', 'seq_num': '800001B8', 'checksum': '0xE8EE', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.12.2': {'link_id': '172.16.12.2', 'link_data': '172.16.12.2', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 10}}}, '172.16.23.2': {'link_id': '172.16.23.2', 'link_data': '172.16.23.2', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 20}}}, '10.0.0.2': {'link_id': '10.0.0.2', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}, '10.0.0.1 10.0.0.1': {'lsa_id': '10.0.0.1', 'adv_router': '10.0.0.1', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.1', 'age': 861, 'type': 1, 'adv_router': '10.0.0.1', 'seq_num': '800001CD', 'checksum': '0xA03C', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.12.2': {'link_id': '172.16.12.2', 'link_data': '172.16.12.1', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 10}}}, '172.16.13.1': {'link_id': '172.16.13.1', 'link_data': '172.16.13.1', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 20}}}, '10.0.0.1': {'link_id': '10.0.0.1', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}}}, 2: {'lsa_type': 2, 'lsas': {'172.16.23.2 10.0.0.2': {'lsa_id': '172.16.23.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.23.2', 'age': 1407, 'type': 2, 'adv_router': '10.0.0.2', 'seq_num': '800001A7', 'checksum': '0x4453', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.2': {}, '10.0.0.3': {}}}}}}, '172.16.13.1 10.0.0.1': {'lsa_id': '172.16.13.1', 'adv_router': '10.0.0.1', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.13.1', 'age': 862, 'type': 2, 'adv_router': '10.0.0.1', 'seq_num': '80000173', 'checksum': '0x21B7', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.1': {}, '10.0.0.3': {}}}}}}, '172.16.12.2 10.0.0.2': {'lsa_id': '172.16.12.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.12.2', 'age': 1407, 'type': 2, 'adv_router': '10.0.0.2', 'seq_num': '8000019F', 'checksum': '0xB1FA', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.2': {}, '10.0.0.1': {}}}}}}}}}}, 'area_id': '0.0.0.0', 'area_type': 'normal', 'statistics': {'spf_runs_count': 57, 'area_scope_lsa_count': 6, 'area_scope_lsa_cksum_sum': '0x03248D'}, 'interfaces': {'GigabitEthernet2': {'name': 'GigabitEthernet2', 'interface_type': 'broadcast', 'passive': False, 'demand_circuit': False, 'priority': 1, 'transmit_delay': 1, 'bfd': {'enable': False}, 'hello_interval': 3, 'dead_interval': 12, 'retransmit_interval': 5, 'lls': True, 'enable': True, 'cost': 10, 'state': 'bdr', 'hello_timer': '00:00:01', 'dr_router_id': '10.0.0.2', 'dr_ip_addr': '172.16.12.2', 'bdr_router_id': '10.0.0.1', 'bdr_ip_addr': '172.16.12.1', 'neighbors': {'10.0.0.2': {'neighbor_router_id': '10.0.0.2', 'address': '172.16.12.2', 'dr_ip_addr': '172.16.12.2', 'bdr_ip_addr': '172.16.12.1', 'state': 'full', 'dead_timer': '00:00:09', 'statistics': {'nbr_event_count': 6, 'nbr_retrans_qlen': 0}}}}, 'GigabitEthernet3': {'name': 'GigabitEthernet3', 'interface_type': 'broadcast', 'passive': False, 'demand_circuit': False, 'priority': 1, 'transmit_delay': 1, 'bfd': {'enable': False}, 'hello_interval': 10, 'dead_interval': 40, 'retransmit_interval': 5, 'lls': True, 'enable': True, 'cost': 20, 'state': 'dr', 'hello_timer': '00:00:05', 'dr_router_id': '10.0.0.1', 'dr_ip_addr': '172.16.13.1', 'bdr_router_id': '10.0.0.3', 'bdr_ip_addr': '172.16.13.3', 'neighbors': {'10.0.0.3': {'neighbor_router_id': '10.0.0.3', 'address': '172.16.13.3', 'dr_ip_addr': '172.16.13.1', 'bdr_ip_addr': '172.16.13.3', 'state': 'full', 'dead_timer': '00:00:37', 'statistics': {'nbr_event_count': 6, 'nbr_retrans_qlen': 0}}}}, 'Loopback0': {'name': 'Loopback0', 'interface_type': 'loopback', 'demand_circuit': False, 'bfd': {'enable': False}, 'enable': True, 'cost': 1}}}}, 'nsr': {'enable': False}, 'graceful_restart': {'cisco': {'enable': False, 'type': 'cisco'}, 'ietf': {'enable': False, 'type': 'ietf'}}, 'auto_cost': {'enable': False}, 'spf_control': {'paths': 4, 'throttle': {'spf': {'start': 50, 'hold': 200, 'maximum': 5000}, 'lsa': {'start': 50, 'hold': 200, 'maximum': 5000}}}, 'stub_router': {'always': {'always': False, 'include_stub': False, 'summary_lsa': False, 'external_lsa': False}}, 'bfd': {'enable': False}, 'adjacency_stagger': {'initial_number': 300, 'maximum_number': 300}}}}}}}}
+raw_data: False</msg>
+<status status="PASS" starttime="20230205 07:03:12.737" endtime="20230205 07:03:12.738"/>
+</kw>
+<return>
+<value>${qdict}</value>
+<status status="PASS" starttime="20230205 07:03:12.738" endtime="20230205 07:03:12.738"/>
+</return>
+<msg timestamp="20230205 07:03:12.738" level="INFO">${model} = {'context_manager': {}, 'attributes': None, 'commands': None, 'connections': None, 'raw_data': False, 'info': {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.1...</msg>
+<status status="PASS" starttime="20230205 07:02:55.361" endtime="20230205 07:03:12.738"/>
+</kw>
+<kw name="dq query" library="genie.libs.robot.GenieRobot">
+<var>${result}</var>
+<arg>data=${model}</arg>
+<arg>filters=value_operator('hello_interval', '&lt;=', 5).get_values('[10]')</arg>
+<doc>Search dictionary using Dq filters</doc>
+<msg timestamp="20230205 07:03:12.740" level="INFO">${result} = ['GigabitEthernet2']</msg>
+<status status="PASS" starttime="20230205 07:03:12.739" endtime="20230205 07:03:12.740"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${result}</arg>
+<arg>msg=Interfaces ${result} on ${device} have too low hello-interval</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20230205 07:03:12.742" level="INFO">Length is 1</msg>
+<msg timestamp="20230205 07:03:12.743" level="FAIL">Interfaces ['GigabitEthernet2'] on r1 have too low hello-interval</msg>
+<status status="FAIL" starttime="20230205 07:03:12.740" endtime="20230205 07:03:12.743"/>
+</kw>
+<status status="FAIL" starttime="20230205 07:02:55.361" endtime="20230205 07:03:12.743"/>
+</iter>
+<iter>
+<var name="${device}">r2</var>
+<kw name="learn OSPF on device">
+<var>${model}</var>
+<arg>${device}</arg>
+<kw name="learn &quot;ospf&quot; on device &quot;${device}&quot;" library="genie.libs.robot.GenieRobot" sourcename="learn &quot;${feature:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<var>${result}</var>
+<doc>Learn Ops feature on device</doc>
+<msg timestamp="20230205 07:03:22.086" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfVirtualLinks'&gt;
+Show Command: show ip ospf virtual-links
+Parser Output is empty</msg>
+<msg timestamp="20230205 07:03:30.613" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfShamLinks'&gt;
+Show Command: show ip ospf sham-links
+Parser Output is empty</msg>
+<msg timestamp="20230205 07:03:30.614" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20230205 07:03:30.614" level="INFO">| Commands for learning feature 'Ospf'                                                                                                               |</msg>
+<msg timestamp="20230205 07:03:30.614" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20230205 07:03:30.614" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20230205 07:03:30.614" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20230205 07:03:30.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspf'&gt;                                                                                      |</msg>
+<msg timestamp="20230205 07:03:30.614" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_protocols.ShowIpProtocols'&gt;, arguments: {'vrf':''}                                                     |</msg>
+<msg timestamp="20230205 07:03:30.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfMplsLdpInterface'&gt;, arguments: {'interface':''}                                         |</msg>
+<msg timestamp="20230205 07:03:30.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfMplsTrafficEngLink'&gt;                                                                    |</msg>
+<msg timestamp="20230205 07:03:30.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseRouter'&gt;                                                                        |</msg>
+<msg timestamp="20230205 07:03:30.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseNetwork'&gt;                                                                       |</msg>
+<msg timestamp="20230205 07:03:30.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseExternal'&gt;                                                                      |</msg>
+<msg timestamp="20230205 07:03:30.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseSummary'&gt;                                                                       |</msg>
+<msg timestamp="20230205 07:03:30.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfDatabaseOpaqueArea'&gt;                                                                    |</msg>
+<msg timestamp="20230205 07:03:30.615" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfInterface'&gt;, arguments: {'interface':''}                                                |</msg>
+<msg timestamp="20230205 07:03:30.616" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfNeighborDetail'&gt;, arguments: {'neighbor':''}                                            |</msg>
+<msg timestamp="20230205 07:03:30.616" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20230205 07:03:30.616" level="INFO">| - Commands with empty output                                                                                                                       |</msg>
+<msg timestamp="20230205 07:03:30.616" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20230205 07:03:30.616" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfVirtualLinks'&gt;                                                                          |</msg>
+<msg timestamp="20230205 07:03:30.616" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxe.show_ospf.ShowIpOspfShamLinks'&gt;                                                                             |</msg>
+<msg timestamp="20230205 07:03:30.616" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20230205 07:03:30.874" level="INFO">2023-02-05 07:03:13,251: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf' +++
+show ip ospf
+ Routing Process "ospf 1" with ID 10.0.0.2
+ Start time: 00:50:25.679, Time elapsed: 1w2d
+ Supports only single TOS(TOS0) routes
+ Supports opaque LSA
+ Supports Link-local Signaling (LLS)
+ Supports area transit capability
+ Supports NSSA (compatible with RFC 3101)
+ Supports Database Exchange Summary List Optimization (RFC 5243)
+ Event-log enabled, Maximum number of events: 1000, Mode: cyclic
+ Router is not originating router-LSAs with maximum metric
+ Initial SPF schedule delay 50 msecs
+ Minimum hold time between two consecutive SPFs 200 msecs
+ Maximum wait time between two consecutive SPFs 5000 msecs
+ Incremental-SPF disabled
+ Initial LSA throttle delay 50 msecs
+ Minimum hold time for LSA throttle 200 msecs
+ Maximum wait time for LSA throttle 5000 msecs
+ Minimum LSA arrival 100 msecs
+ LSA group pacing timer 240 secs
+ Interface flood pacing timer 33 msecs
+ Retransmission pacing timer 66 msecs
+ EXCHANGE/LOADING adjacency limit: initial 300, process maximum 300
+ Number of external LSA 0. Checksum Sum 0x000000
+ Number of opaque AS LSA 0. Checksum Sum 0x000000
+ Number of DCbitless external and opaque AS LSA 0
+ Number of DoNotAge external and opaque AS LSA 0
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ Number of areas transit capable is 0
+ External flood list length 0
+ IETF NSF helper support enabled
+ Cisco NSF helper support enabled
+ Reference bandwidth unit is 100 mbps
+    Area BACKBONE(0)
+        Number of interfaces in this area is 3 (1 loopback)
+	Area has no authentication
+	SPF algorithm last executed 1w0d ago
+	SPF algorithm executed 67 times
+	Area ranges are
+	Number of LSA 6. Checksum Sum 0x03248D
+	Number of opaque link LSA 0. Checksum Sum 0x000000
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+
+r2#
+
+2023-02-05 07:03:13,632: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip protocols' +++
+show ip protocols
+*** IP Routing is NSF aware ***
+
+Routing Protocol is "application"
+  Sending updates every 0 seconds
+  Invalid after 0 seconds, hold down 0, flushed after 0
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Maximum path: 32
+  Routing for Networks:
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+  Distance: (default is 4)
+
+Routing Protocol is "ospf 1"
+  Outgoing update filter list for all interfaces is not set
+  Incoming update filter list for all interfaces is not set
+  Router ID 10.0.0.2
+  Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+  Routing on Interfaces Configured Explicitly (Area 0):
+    Loopback0
+    GigabitEthernet3
+    GigabitEthernet2
+  Routing Information Sources:
+    Gateway         Distance      Last Update
+    10.0.0.3             110      00:11:24
+    10.0.0.1             110      1w0d
+  Distance: (default is 110)
+
+r2#
+
+2023-02-05 07:03:14,235: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r2#
+
+2023-02-05 07:03:15,304: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf mpls ldp interface' +++
+show ip ospf mpls ldp interface
+Loopback0
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+GigabitEthernet3
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+GigabitEthernet2
+  Process ID 1, Area 0
+  LDP is not configured through LDP autoconfig
+  LDP-IGP Synchronization : Not required
+  Holddown timer is disabled
+  Interface is up 
+r2#
+
+2023-02-05 07:03:15,930: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf mpls traffic-eng link' +++
+show ip ospf mpls traffic-eng link
+
+            OSPF Router with ID (10.0.0.2) (Process ID 1)
+
+  Area 0 MPLS TE not initialized
+r2#
+
+2023-02-05 07:03:16,776: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r2#
+
+2023-02-05 07:03:17,896: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf database router' +++
+show ip ospf database router
+
+            OSPF Router with ID (10.0.0.2) (Process ID 1)
+
+		Router Link States (Area 0)
+
+  LS age: 880
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.1
+  Advertising Router: 10.0.0.1
+  LS Seq Number: 800001CD
+  Checksum: 0xA03C
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.1
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.13.1
+     (Link Data) Router Interface address: 172.16.13.1
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 20
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.12.2
+     (Link Data) Router Interface address: 172.16.12.1
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1172
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.2
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 800001B8
+  Checksum: 0xE8EE
+  Length: 60
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.2
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.23.2
+     (Link Data) Router Interface address: 172.16.23.2
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 20
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.12.2
+     (Link Data) Router Interface address: 172.16.12.2
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1982
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.3
+  Advertising Router: 10.0.0.3
+  LS Seq Number: 800001C1
+  Checksum: 0x835F
+  Length: 60
+  AS Boundary Router
+  Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.3
+     (Link Data) Network Mask: 255.255.255.255
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.23.2
+     (Link Data) Router Interface address: 172.16.23.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.13.1
+     (Link Data) Router Interface address: 172.16.13.3
+      Number of MTID metrics: 0
+       TOS 0 Metrics: 1
+
+
+r2#
+
+2023-02-05 07:03:18,759: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf database network' +++
+show ip ospf database network
+
+            OSPF Router with ID (10.0.0.2) (Process ID 1)
+
+		Net Link States (Area 0)
+
+  LS age: 1424
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.12.2 (address of Designated Router)
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 8000019F
+  Checksum: 0xB1FA
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.2
+	Attached Router: 10.0.0.1
+
+  LS age: 881
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.13.1 (address of Designated Router)
+  Advertising Router: 10.0.0.1
+  LS Seq Number: 80000173
+  Checksum: 0x21B7
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.1
+	Attached Router: 10.0.0.3
+
+  LS age: 1424
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.23.2 (address of Designated Router)
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 800001A7
+  Checksum: 0x4453
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.2
+	Attached Router: 10.0.0.3
+
+r2#
+
+2023-02-05 07:03:19,483: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf database external' +++
+show ip ospf database external
+
+            OSPF Router with ID (10.0.0.2) (Process ID 1)
+r2#
+
+2023-02-05 07:03:20,131: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf database summary' +++
+show ip ospf database summary
+
+            OSPF Router with ID (10.0.0.2) (Process ID 1)
+r2#
+
+2023-02-05 07:03:20,752: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf database opaque-area' +++
+show ip ospf database opaque-area
+
+            OSPF Router with ID (10.0.0.2) (Process ID 1)
+r2#
+
+2023-02-05 07:03:21,553: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf virtual-links' +++
+show ip ospf virtual-links
+r2#
+
+2023-02-05 07:03:22,150: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf interface' +++
+show ip ospf interface
+Loopback0 is up, line protocol is up 
+  Internet Address 10.0.0.2/32, Interface ID 12, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.2, Network Type LOOPBACK, Cost: 1
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           1         no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Loopback interface is treated as a stub Host
+GigabitEthernet3 is up, line protocol is up 
+  Internet Address 172.16.23.2/24, Interface ID 9, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.2, Network Type BROADCAST, Cost: 20
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           20        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 10.0.0.2, Interface address 172.16.23.2
+  Backup Designated router (ID) 10.0.0.3, Interface address 172.16.23.3
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:07
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/3/3, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 0, maximum is 3
+  Last flood scan time is 0 msec, maximum is 3 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.3  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+GigabitEthernet2 is up, line protocol is up 
+  Internet Address 172.16.12.2/24, Interface ID 8, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.2, Network Type BROADCAST, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 10.0.0.2, Interface address 172.16.12.2
+  Backup Designated router (ID) 10.0.0.1, Interface address 172.16.12.1
+  Timer intervals configured, Hello 3, Dead 12, Wait 12, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:00
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 3
+  Last flood scan time is 0 msec, maximum is 6 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.1  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+r2#
+
+2023-02-05 07:03:22,786: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r2#
+
+2023-02-05 07:03:23,830: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r2#
+
+2023-02-05 07:03:24,856: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r2#
+
+2023-02-05 07:03:25,798: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf neighbor detail' +++
+show ip ospf neighbor detail
+ Neighbor 10.0.0.3, interface address 172.16.23.3, interface-id 3
+    In the area 0 via interface GigabitEthernet3
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.23.2 BDR is 172.16.23.3
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:38
+    Neighbor is up for 1w2d    
+    Index 1/2/2, retransmission queue length 0, number of retransmission 2
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 1, maximum is 1
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+ Neighbor 10.0.0.1, interface address 172.16.12.1, interface-id 8
+    In the area 0 via interface GigabitEthernet2
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.12.2 BDR is 172.16.12.1
+    Options is 0x12 in Hello (E-bit, L-bit)
+    Options is 0x52 in DBD (E-bit, L-bit, O-bit)
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:11
+    Neighbor is up for 1w0d    
+    Index 1/1/1, retransmission queue length 0, number of retransmission 0
+    First 0x0(0)/0x0(0)/0x0(0) Next 0x0(0)/0x0(0)/0x0(0)
+    Last retransmission scan length is 0, maximum is 0
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+r2#
+
+2023-02-05 07:03:26,425: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf interface GigabitEthernet3' +++
+show ip ospf interface GigabitEthernet3
+GigabitEthernet3 is up, line protocol is up 
+  Internet Address 172.16.23.2/24, Interface ID 9, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.2, Network Type BROADCAST, Cost: 20
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           20        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 10.0.0.2, Interface address 172.16.23.2
+  Backup Designated router (ID) 10.0.0.3, Interface address 172.16.23.3
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:02
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/3/3, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 0, maximum is 3
+  Last flood scan time is 0 msec, maximum is 3 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.3  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+r2#
+
+2023-02-05 07:03:27,250: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r2#
+
+2023-02-05 07:03:28,177: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf interface GigabitEthernet2' +++
+show ip ospf interface GigabitEthernet2
+GigabitEthernet2 is up, line protocol is up 
+  Internet Address 172.16.12.2/24, Interface ID 8, Area 0
+  Attached via Interface Enable
+  Process ID 1, Router ID 10.0.0.2, Network Type BROADCAST, Cost: 10
+  Topology-MTID    Cost    Disabled    Shutdown      Topology Name
+        0           10        no          no            Base
+  Enabled by interface config, including secondary ip addresses
+  Transmit Delay is 1 sec, State DR, Priority 1
+  Designated Router (ID) 10.0.0.2, Interface address 172.16.12.2
+  Backup Designated router (ID) 10.0.0.1, Interface address 172.16.12.1
+  Timer intervals configured, Hello 3, Dead 12, Wait 12, Retransmit 5
+    oob-resync timeout 40
+    Hello due in 00:00:02
+  Supports Link-local Signaling (LLS)
+  Cisco NSF helper support enabled
+  IETF NSF helper support enabled
+  Can be protected by per-prefix Loop-Free FastReroute
+  Can be used for per-prefix Loop-Free FastReroute repair paths
+  Not Protected by per-prefix TI-LFA
+  Index 1/2/2, flood queue length 0
+  Next 0x0(0)/0x0(0)/0x0(0)
+  Last flood scan length is 1, maximum is 3
+  Last flood scan time is 0 msec, maximum is 6 msec
+  Neighbor Count is 1, Adjacent neighbor count is 1 
+    Adjacent with neighbor 10.0.0.1  (Backup Designated Router)
+  Suppress hello for 0 neighbor(s)
+r2#
+
+2023-02-05 07:03:28,998: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show running-config | section router ospf 1' +++
+show running-config | section router ospf 1
+router ospf 1
+ipv6 router ospf 1
+r2#
+
+2023-02-05 07:03:30,050: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf sham-links' +++
+show ip ospf sham-links
+r2#</msg>
+<msg timestamp="20230205 07:03:30.881" level="INFO">${result} = &lt;Ospf object at 0x7f3796794d60&gt;</msg>
+<status status="PASS" starttime="20230205 07:03:12.743" endtime="20230205 07:03:30.881"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${qdict}</var>
+<arg>genie.conf.base.utils.QDict($result.to_dict())</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230205 07:03:30.893" level="INFO">${qdict} = {'context_manager': {}, 'attributes': None, 'commands': None, 'connections': None, 'raw_data': False, 'info': {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.2...</msg>
+<status status="PASS" starttime="20230205 07:03:30.881" endtime="20230205 07:03:30.893"/>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<arg>${qdict}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<msg timestamp="20230205 07:03:30.894" level="INFO">Dictionary size is 6 and it contains following items:
+attributes: None
+commands: None
+connections: None
+context_manager: {}
+info: {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.2', 'preference': {'single_value': {'all': 110}}, 'mpls': {'ldp': {'autoconfig': False, 'autoconfig_area_id': '0.0.0.0'}}, 'areas': {'0.0.0.0': {'mpls': {'te': {'enable': False}}, 'database': {'lsa_types': {1: {'lsa_type': 1, 'lsas': {'10.0.0.3 10.0.0.3': {'lsa_id': '10.0.0.3', 'adv_router': '10.0.0.3', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.3', 'age': 1982, 'type': 1, 'adv_router': '10.0.0.3', 'seq_num': '800001C1', 'checksum': '0x835F', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.13.1': {'link_id': '172.16.13.1', 'link_data': '172.16.13.3', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}, '172.16.23.2': {'link_id': '172.16.23.2', 'link_data': '172.16.23.3', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}, '10.0.0.3': {'link_id': '10.0.0.3', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}, '10.0.0.2 10.0.0.2': {'lsa_id': '10.0.0.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.2', 'age': 1172, 'type': 1, 'adv_router': '10.0.0.2', 'seq_num': '800001B8', 'checksum': '0xE8EE', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.12.2': {'link_id': '172.16.12.2', 'link_data': '172.16.12.2', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 10}}}, '172.16.23.2': {'link_id': '172.16.23.2', 'link_data': '172.16.23.2', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 20}}}, '10.0.0.2': {'link_id': '10.0.0.2', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}, '10.0.0.1 10.0.0.1': {'lsa_id': '10.0.0.1', 'adv_router': '10.0.0.1', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.1', 'age': 880, 'type': 1, 'adv_router': '10.0.0.1', 'seq_num': '800001CD', 'checksum': '0xA03C', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.12.2': {'link_id': '172.16.12.2', 'link_data': '172.16.12.1', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 10}}}, '172.16.13.1': {'link_id': '172.16.13.1', 'link_data': '172.16.13.1', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 20}}}, '10.0.0.1': {'link_id': '10.0.0.1', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}}}, 2: {'lsa_type': 2, 'lsas': {'172.16.23.2 10.0.0.2': {'lsa_id': '172.16.23.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.23.2', 'age': 1424, 'type': 2, 'adv_router': '10.0.0.2', 'seq_num': '800001A7', 'checksum': '0x4453', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.2': {}, '10.0.0.3': {}}}}}}, '172.16.13.1 10.0.0.1': {'lsa_id': '172.16.13.1', 'adv_router': '10.0.0.1', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.13.1', 'age': 881, 'type': 2, 'adv_router': '10.0.0.1', 'seq_num': '80000173', 'checksum': '0x21B7', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.1': {}, '10.0.0.3': {}}}}}}, '172.16.12.2 10.0.0.2': {'lsa_id': '172.16.12.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.12.2', 'age': 1424, 'type': 2, 'adv_router': '10.0.0.2', 'seq_num': '8000019F', 'checksum': '0xB1FA', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.2': {}, '10.0.0.1': {}}}}}}}}}}, 'area_id': '0.0.0.0', 'area_type': 'normal', 'statistics': {'spf_runs_count': 67, 'area_scope_lsa_count': 6, 'area_scope_lsa_cksum_sum': '0x03248D'}, 'interfaces': {'GigabitEthernet2': {'name': 'GigabitEthernet2', 'interface_type': 'broadcast', 'passive': False, 'demand_circuit': False, 'priority': 1, 'transmit_delay': 1, 'bfd': {'enable': False}, 'hello_interval': 3, 'dead_interval': 12, 'retransmit_interval': 5, 'lls': True, 'enable': True, 'cost': 10, 'state': 'dr', 'hello_timer': '00:00:00', 'dr_router_id': '10.0.0.2', 'dr_ip_addr': '172.16.12.2', 'bdr_router_id': '10.0.0.1', 'bdr_ip_addr': '172.16.12.1', 'neighbors': {'10.0.0.1': {'neighbor_router_id': '10.0.0.1', 'address': '172.16.12.1', 'dr_ip_addr': '172.16.12.2', 'bdr_ip_addr': '172.16.12.1', 'state': 'full', 'dead_timer': '00:00:11', 'statistics': {'nbr_event_count': 6, 'nbr_retrans_qlen': 0}}}}, 'GigabitEthernet3': {'name': 'GigabitEthernet3', 'interface_type': 'broadcast', 'passive': False, 'demand_circuit': False, 'priority': 1, 'transmit_delay': 1, 'bfd': {'enable': False}, 'hello_interval': 10, 'dead_interval': 40, 'retransmit_interval': 5, 'lls': True, 'enable': True, 'cost': 20, 'state': 'dr', 'hello_timer': '00:00:07', 'dr_router_id': '10.0.0.2', 'dr_ip_addr': '172.16.23.2', 'bdr_router_id': '10.0.0.3', 'bdr_ip_addr': '172.16.23.3', 'neighbors': {'10.0.0.3': {'neighbor_router_id': '10.0.0.3', 'address': '172.16.23.3', 'dr_ip_addr': '172.16.23.2', 'bdr_ip_addr': '172.16.23.3', 'state': 'full', 'dead_timer': '00:00:38', 'statistics': {'nbr_event_count': 6, 'nbr_retrans_qlen': 0}}}}, 'Loopback0': {'name': 'Loopback0', 'interface_type': 'loopback', 'demand_circuit': False, 'bfd': {'enable': False}, 'enable': True, 'cost': 1}}}}, 'nsr': {'enable': False}, 'graceful_restart': {'cisco': {'enable': False, 'type': 'cisco'}, 'ietf': {'enable': False, 'type': 'ietf'}}, 'auto_cost': {'enable': False}, 'spf_control': {'paths': 4, 'throttle': {'spf': {'start': 50, 'hold': 200, 'maximum': 5000}, 'lsa': {'start': 50, 'hold': 200, 'maximum': 5000}}}, 'stub_router': {'always': {'always': False, 'include_stub': False, 'summary_lsa': False, 'external_lsa': False}}, 'bfd': {'enable': False}, 'adjacency_stagger': {'initial_number': 300, 'maximum_number': 300}}}}}}}}
+raw_data: False</msg>
+<status status="PASS" starttime="20230205 07:03:30.893" endtime="20230205 07:03:30.894"/>
+</kw>
+<return>
+<value>${qdict}</value>
+<status status="PASS" starttime="20230205 07:03:30.894" endtime="20230205 07:03:30.894"/>
+</return>
+<msg timestamp="20230205 07:03:30.894" level="INFO">${model} = {'context_manager': {}, 'attributes': None, 'commands': None, 'connections': None, 'raw_data': False, 'info': {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.2...</msg>
+<status status="PASS" starttime="20230205 07:03:12.743" endtime="20230205 07:03:30.895"/>
+</kw>
+<kw name="dq query" library="genie.libs.robot.GenieRobot">
+<var>${result}</var>
+<arg>data=${model}</arg>
+<arg>filters=value_operator('hello_interval', '&lt;=', 5).get_values('[10]')</arg>
+<doc>Search dictionary using Dq filters</doc>
+<msg timestamp="20230205 07:03:30.896" level="INFO">${result} = ['GigabitEthernet2']</msg>
+<status status="PASS" starttime="20230205 07:03:30.895" endtime="20230205 07:03:30.896"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${result}</arg>
+<arg>msg=Interfaces ${result} on ${device} have too low hello-interval</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20230205 07:03:30.899" level="INFO">Length is 1</msg>
+<msg timestamp="20230205 07:03:30.899" level="FAIL">Interfaces ['GigabitEthernet2'] on r2 have too low hello-interval</msg>
+<status status="FAIL" starttime="20230205 07:03:30.896" endtime="20230205 07:03:30.900"/>
+</kw>
+<status status="FAIL" starttime="20230205 07:03:12.743" endtime="20230205 07:03:30.900"/>
+</iter>
+<iter>
+<var name="${device}">r3</var>
+<kw name="learn OSPF on device">
+<var>${model}</var>
+<arg>${device}</arg>
+<kw name="learn &quot;ospf&quot; on device &quot;${device}&quot;" library="genie.libs.robot.GenieRobot" sourcename="learn &quot;${feature:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<var>${result}</var>
+<doc>Learn Ops feature on device</doc>
+<msg timestamp="20230205 07:03:37.815" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveVirtualLinks'&gt;
+Parser Output is empty</msg>
+<msg timestamp="20230205 07:03:40.185" level="INFO">Could not learn &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveShamLinks'&gt;
+Parser Output is empty</msg>
+<msg timestamp="20230205 07:03:40.186" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20230205 07:03:40.186" level="INFO">| Commands for learning feature 'Ospf'                                                                                                               |</msg>
+<msg timestamp="20230205 07:03:40.186" level="INFO">+====================================================================================================================================================+</msg>
+<msg timestamp="20230205 07:03:40.186" level="INFO">| - Parsed commands                                                                                                                                  |</msg>
+<msg timestamp="20230205 07:03:40.186" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20230205 07:03:40.186" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusive'&gt;, arguments: {'vrf':''}                                                  |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_protocol.ShowProtocolsAfiAllAll'&gt;                                                                      |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfMplsTrafficEngLink'&gt;                                                                      |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveDatabaseRouter'&gt;, arguments: {'vrf':''}                                    |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveDatabaseNetwork'&gt;, arguments: {'vrf':''}                                   |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveDatabaseExternal'&gt;, arguments: {'vrf':''}                                  |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveDatabaseSummary'&gt;, arguments: {'vrf':''}                                   |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveDatabaseOpaqueArea'&gt;, arguments: {'vrf':''}                                |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveInterface'&gt;, arguments: {'interface':'','vrf':''}                          |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveNeighborDetail'&gt;, arguments: {'interface':'','neighbor':'','vrf':''}       |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">| - Commands with empty output                                                                                                                       |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|----------------------------------------------------------------------------------------------------------------------------------------------------|</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveVirtualLinks'&gt;, arguments: {'vrf':''}                                      |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|   cmd: &lt;class 'genie.libs.parser.iosxr.show_ospf.ShowOspfVrfAllInclusiveShamLinks'&gt;, arguments: {'vrf':''}                                         |</msg>
+<msg timestamp="20230205 07:03:40.187" level="INFO">|====================================================================================================================================================|</msg>
+<msg timestamp="20230205 07:03:40.309" level="INFO">2023-02-05 07:03:30,983: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive' +++
+show ospf vrf all-inclusive
+Sun Feb  5 07:02:56.590 UTC
+
+ Routing Process "ospf 1" with ID 10.0.0.3
+ Role: Primary Active
+ NSR (Non-stop routing) is Enabled
+ Supports only single TOS(TOS0) routes
+ Supports opaque LSA
+ It is an autonomous system boundary router
+ Redistributing External Routes from,
+    static
+    Maximum number of redistributed prefixes 10240
+    Threshold for warning message 75%
+ Router is not originating router-LSAs with maximum metric
+ Initial SPF schedule delay 50 msecs
+ Minimum hold time between two consecutive SPFs 200 msecs
+ Maximum wait time between two consecutive SPFs 5000 msecs
+ Initial LSA throttle delay 50 msecs
+ Minimum hold time for LSA throttle 200 msecs
+ Maximum wait time for LSA throttle 5000 msecs
+ Minimum LSA interval 200 msecs. Minimum LSA arrival 100 msecs
+ LSA refresh interval 1800 seconds
+ Flood pacing interval 33 msecs. Retransmission pacing interval 66 msecs
+ Adjacency stagger enabled; initial (per area): 2, maximum: 64
+    Number of neighbors forming: 0, 2 full
+ Maximum number of configured interfaces 1024
+ Number of external LSA 0. Checksum Sum 00000000
+ Number of opaque AS LSA 0. Checksum Sum 00000000
+ Number of DCbitless external and opaque AS LSA 0
+ Number of DoNotAge external and opaque AS LSA 0
+ Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+ External flood list length 0
+ SNMP trap is enabled
+ LSD connected, registered, bound, revision 1
+ Segment Routing Global Block default (16000-23999), not allocated
+ Strict-SPF capability is enabled
+    Area BACKBONE(0)
+	Number of interfaces in this area is 3
+	SPF algorithm executed 57 times
+	Number of LSA 6.  Checksum Sum 0x039021
+	Number of opaque link LSA 0.  Checksum Sum 00000000
+	Number of DCbitless LSA 0
+	Number of indication LSA 0
+	Number of DoNotAge LSA 0
+	Flood list length 0
+	Number of LFA enabled interfaces 0, LFA revision 0
+	Number of Per Prefix LFA enabled interfaces 0
+	Number of neighbors forming in staggered mode 0, 2 full
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:31,901: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show protocols afi-all all' +++
+show protocols afi-all all
+Sun Feb  5 07:02:57.510 UTC
+
+Routing Protocol OSPF 1
+  Router Id: 10.0.0.3
+  Distance: 110
+  Non-Stop Forwarding: Disabled
+  Redistribution:
+    static
+  Area 0
+    Loopback0
+    GigabitEthernet0/0/0/0
+    GigabitEthernet0/0/0/1
+
+Routing Protocol OSPFv3 1
+  Router Id: 10.0.0.3
+  Distance: 110
+  Graceful Restart: Disabled
+  Redistribution:
+    None
+  Area 0
+    GigabitEthernet0/0/0/0
+    GigabitEthernet0/0/0/1
+    Loopback0
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:32,536: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf mpls traffic-eng link' +++
+show ospf mpls traffic-eng link
+Sun Feb  5 07:02:58.130 UTC
+
+            OSPF Router with ID (10.0.0.3) (Process ID 1)
+
+  Area 0 MPLS TE not initialized
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:33,137: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive database router' +++
+show ospf vrf all-inclusive database router
+Sun Feb  5 07:02:58.749 UTC
+
+
+            OSPF Router with ID (10.0.0.3) (Process ID 1)
+
+		Router Link States (Area 0)
+
+  Routing Bit Set on this LSA
+  LS age: 895
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.1
+  Advertising Router: 10.0.0.1
+  LS Seq Number: 800001cd
+  Checksum: 0xa03c
+  Length: 60
+   Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.1
+     (Link Data) Network Mask: 255.255.255.255
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.13.1
+     (Link Data) Router Interface address: 172.16.13.1
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 20
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.12.2
+     (Link Data) Router Interface address: 172.16.12.1
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 10
+
+
+  Routing Bit Set on this LSA
+  LS age: 1188
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.2
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 800001b8
+  Checksum: 0xe8ee
+  Length: 60
+   Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.2
+     (Link Data) Network Mask: 255.255.255.255
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.23.2
+     (Link Data) Router Interface address: 172.16.23.2
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 20
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.12.2
+     (Link Data) Router Interface address: 172.16.12.2
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 10
+
+
+  LS age: 1996
+  Options: (No TOS-capability, DC)
+  LS Type: Router Links
+  Link State ID: 10.0.0.3
+  Advertising Router: 10.0.0.3
+  LS Seq Number: 800001c1
+  Checksum: 0x835f
+  Length: 60
+  AS Boundary Router
+   Number of Links: 3
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.0.0.3
+     (Link Data) Network Mask: 255.255.255.255
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.23.2
+     (Link Data) Router Interface address: 172.16.23.3
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 1
+
+    Link connected to: a Transit Network
+     (Link ID) Designated Router address: 172.16.13.1
+     (Link Data) Router Interface address: 172.16.13.3
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 1
+
+
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:34,057: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive database network' +++
+show ospf vrf all-inclusive database network
+Sun Feb  5 07:02:59.669 UTC
+
+
+            OSPF Router with ID (10.0.0.3) (Process ID 1)
+
+		Net Link States (Area 0)
+
+  Routing Bit Set on this LSA
+  LS age: 1440
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.12.2 (address of Designated Router)
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 8000019f
+  Checksum: 0xb1fa
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.2
+	Attached Router: 10.0.0.1
+
+  Routing Bit Set on this LSA
+  LS age: 896
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.13.1 (address of Designated Router)
+  Advertising Router: 10.0.0.1
+  LS Seq Number: 80000173
+  Checksum: 0x21b7
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.1
+	Attached Router: 10.0.0.3
+
+  Routing Bit Set on this LSA
+  LS age: 1440
+  Options: (No TOS-capability, DC)
+  LS Type: Network Links
+  Link State ID: 172.16.23.2 (address of Designated Router)
+  Advertising Router: 10.0.0.2
+  LS Seq Number: 800001a7
+  Checksum: 0x4453
+  Length: 32
+  Network Mask: /24
+	Attached Router: 10.0.0.2
+	Attached Router: 10.0.0.3
+
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:34,829: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive database external' +++
+show ospf vrf all-inclusive database external
+Sun Feb  5 07:03:00.429 UTC
+
+
+            OSPF Router with ID (10.0.0.3) (Process ID 1)
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:35,414: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive database summary' +++
+show ospf vrf all-inclusive database summary
+Sun Feb  5 07:03:01.019 UTC
+
+
+            OSPF Router with ID (10.0.0.3) (Process ID 1)
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:36,014: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive database opaque-area' +++
+show ospf vrf all-inclusive database opaque-area
+Sun Feb  5 07:03:01.639 UTC
+
+
+            OSPF Router with ID (10.0.0.3) (Process ID 1)
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:36,627: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive virtual-links' +++
+show ospf vrf all-inclusive virtual-links
+Sun Feb  5 07:03:02.239 UTC
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:37,879: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive interface' +++
+show ospf vrf all-inclusive interface
+Sun Feb  5 07:03:03.599 UTC
+
+Interfaces for OSPF 1
+
+Loopback0 is up, line protocol is up 
+  Internet Address 10.0.0.3/32, Area 0
+  Label stack Primary label 0 Backup label 0 SRTE label 0
+  Process ID 1, Router ID 10.0.0.3, Network Type LOOPBACK, Cost: 1
+  Loopback interface is treated as a stub Host
+GigabitEthernet0/0/0/0 is up, line protocol is up 
+  Internet Address 172.16.23.3/24, Area 0
+  Label stack Primary label 0 Backup label 0 SRTE label 0
+  Process ID 1, Router ID 10.0.0.3, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State BDR, Priority 1, MTU 1500, MaxPktSz 1500
+  Forward reference No, Unnumbered no,  Bandwidth 1000000 
+  Designated Router (ID) 10.0.0.2, Interface address 172.16.23.2
+  Backup Designated router (ID) 10.0.0.3, Interface address 172.16.23.3
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:06:173
+  Index 3/3, flood queue length 0
+  Next 0(0)/0(0)
+  Last flood scan length is 1, maximum is 2
+  Last flood scan time is 0 msec, maximum is 0 msec
+  LS Ack List: current length 0, high water mark 5
+  Neighbor Count is 1, Adjacent neighbor count is 1
+    Adjacent with neighbor 10.0.0.2  (Designated Router)
+  Suppress hello for 0 neighbor(s)
+  Multi-area interface Count is 0
+GigabitEthernet0/0/0/1 is up, line protocol is up 
+  Internet Address 172.16.13.3/24, Area 0
+  Label stack Primary label 0 Backup label 0 SRTE label 0
+  Process ID 1, Router ID 10.0.0.3, Network Type BROADCAST, Cost: 1
+  Transmit Delay is 1 sec, State BDR, Priority 1, MTU 1500, MaxPktSz 1500
+  Forward reference No, Unnumbered no,  Bandwidth 1000000 
+  Designated Router (ID) 10.0.0.1, Interface address 172.16.13.1
+  Backup Designated router (ID) 10.0.0.3, Interface address 172.16.13.3
+  Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit 5
+    Hello due in 00:00:06:106
+  Index 2/2, flood queue length 0
+  Next 0(0)/0(0)
+  Last flood scan length is 1, maximum is 2
+  Last flood scan time is 0 msec, maximum is 0 msec
+  LS Ack List: current length 0, high water mark 3
+  Neighbor Count is 1, Adjacent neighbor count is 1
+    Adjacent with neighbor 10.0.0.1  (Designated Router)
+  Suppress hello for 0 neighbor(s)
+  Multi-area interface Count is 0
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:38,919: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive neighbor detail' +++
+show ospf vrf all-inclusive neighbor detail
+Sun Feb  5 07:03:04.519 UTC
+
+* Indicates MADJ interface
+# Indicates Neighbor awaiting BFD session up
+
+Neighbors for OSPF 1
+
+ Neighbor 10.0.0.2, interface address 172.16.23.2
+    In the area 0 via interface GigabitEthernet0/0/0/0 
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.23.2 BDR is 172.16.23.3
+    Options is 0x52  
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:30
+    Neighbor is up for 1w2d
+    Number of DBD retrans during last exchange 0
+    Index 1/1, retransmission queue length 0, number of retransmission 1
+    First 0(0)/0(0) Next 0(0)/0(0)
+    Last retransmission scan length is 1, maximum is 1
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+    LS Ack list: NSR-sync pending 0, high water mark 0
+    Neighbor Interface ID: 9
+
+ Neighbor 10.0.0.1, interface address 172.16.13.1
+    In the area 0 via interface GigabitEthernet0/0/0/1 
+    Neighbor priority is 1, State is FULL, 6 state changes
+    DR is 172.16.13.1 BDR is 172.16.13.3
+    Options is 0x52  
+    LLS Options is 0x1 (LR)
+    Dead timer due in 00:00:39
+    Neighbor is up for 1w1d
+    Number of DBD retrans during last exchange 0
+    Index 2/2, retransmission queue length 0, number of retransmission 0
+    First 0(0)/0(0) Next 0(0)/0(0)
+    Last retransmission scan length is 0, maximum is 0
+    Last retransmission scan time is 0 msec, maximum is 0 msec
+    LS Ack list: NSR-sync pending 0, high water mark 0
+    Neighbor Interface ID: 9
+
+
+Total neighbor count: 2
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:03:39,662: %UNICON-INFO: +++ r3 with via 'cli': executing command 'show ospf vrf all-inclusive sham-links' +++
+show ospf vrf all-inclusive sham-links
+Sun Feb  5 07:03:05.269 UTC
+
+RP/0/0/CPU0:r3#</msg>
+<msg timestamp="20230205 07:03:40.314" level="INFO">${result} = &lt;Ospf object at 0x7f37967bfd30&gt;</msg>
+<status status="PASS" starttime="20230205 07:03:30.900" endtime="20230205 07:03:40.314"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${qdict}</var>
+<arg>genie.conf.base.utils.QDict($result.to_dict())</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230205 07:03:40.328" level="INFO">${qdict} = {'context_manager': {}, 'attributes': None, 'commands': None, 'connections': None, 'raw_data': False, 'info': {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.3...</msg>
+<status status="PASS" starttime="20230205 07:03:40.314" endtime="20230205 07:03:40.328"/>
+</kw>
+<kw name="Log Dictionary" library="Collections">
+<arg>${qdict}</arg>
+<doc>Logs the size and contents of the ``dictionary`` using given ``level``.</doc>
+<msg timestamp="20230205 07:03:40.328" level="INFO">Dictionary size is 6 and it contains following items:
+attributes: None
+commands: None
+connections: None
+context_manager: {}
+info: {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.3', 'preference': {'single_value': {'all': 110}}, 'mpls': {'te': {'router_id': '10.0.0.3'}}, 'areas': {'0.0.0.0': {'database': {'lsa_types': {1: {'lsa_type': 1, 'lsas': {'10.0.0.3 10.0.0.3': {'lsa_id': '10.0.0.3', 'adv_router': '10.0.0.3', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.3', 'age': 1996, 'type': 1, 'adv_router': '10.0.0.3', 'seq_num': '800001c1', 'checksum': '0x835f', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.13.1': {'link_id': '172.16.13.1', 'link_data': '172.16.13.3', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}, '172.16.23.2': {'link_id': '172.16.23.2', 'link_data': '172.16.23.3', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}, '10.0.0.3': {'link_id': '10.0.0.3', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}, '10.0.0.2 10.0.0.2': {'lsa_id': '10.0.0.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.2', 'age': 1188, 'type': 1, 'adv_router': '10.0.0.2', 'seq_num': '800001b8', 'checksum': '0xe8ee', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.12.2': {'link_id': '172.16.12.2', 'link_data': '172.16.12.2', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 10}}}, '172.16.23.2': {'link_id': '172.16.23.2', 'link_data': '172.16.23.2', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 20}}}, '10.0.0.2': {'link_id': '10.0.0.2', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}, '10.0.0.1 10.0.0.1': {'lsa_id': '10.0.0.1', 'adv_router': '10.0.0.1', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '10.0.0.1', 'age': 895, 'type': 1, 'adv_router': '10.0.0.1', 'seq_num': '800001cd', 'checksum': '0xa03c', 'length': 60}, 'body': {'router': {'num_of_links': 3, 'links': {'172.16.12.2': {'link_id': '172.16.12.2', 'link_data': '172.16.12.1', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 10}}}, '172.16.13.1': {'link_id': '172.16.13.1', 'link_data': '172.16.13.1', 'type': 'transit network', 'topologies': {0: {'mt_id': 0, 'metric': 20}}}, '10.0.0.1': {'link_id': '10.0.0.1', 'link_data': '255.255.255.255', 'type': 'stub network', 'topologies': {0: {'mt_id': 0, 'metric': 1}}}}}}}}}}, 2: {'lsa_type': 2, 'lsas': {'172.16.23.2 10.0.0.2': {'lsa_id': '172.16.23.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.23.2', 'age': 1440, 'type': 2, 'adv_router': '10.0.0.2', 'seq_num': '800001a7', 'checksum': '0x4453', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.2': {}, '10.0.0.3': {}}}}}}, '172.16.13.1 10.0.0.1': {'lsa_id': '172.16.13.1', 'adv_router': '10.0.0.1', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.13.1', 'age': 896, 'type': 2, 'adv_router': '10.0.0.1', 'seq_num': '80000173', 'checksum': '0x21b7', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.1': {}, '10.0.0.3': {}}}}}}, '172.16.12.2 10.0.0.2': {'lsa_id': '172.16.12.2', 'adv_router': '10.0.0.2', 'ospfv2': {'header': {'option': 'None', 'lsa_id': '172.16.12.2', 'age': 1440, 'type': 2, 'adv_router': '10.0.0.2', 'seq_num': '8000019f', 'checksum': '0xb1fa', 'length': 32}, 'body': {'network': {'network_mask': '255.255.255.0', 'attached_routers': {'10.0.0.2': {}, '10.0.0.1': {}}}}}}}}}}, 'area_id': '0.0.0.0', 'area_type': 'normal', 'mpls': {'te': {'enable': False}}, 'statistics': {'spf_runs_count': 57, 'area_scope_lsa_count': 6, 'area_scope_lsa_cksum_sum': '0x039021'}, 'interfaces': {'GigabitEthernet0/0/0/1': {'name': 'GigabitEthernet0/0/0/1', 'interface_type': 'broadcast', 'passive': False, 'demand_circuit': False, 'priority': 1, 'bfd': {'enable': False}, 'hello_interval': 10, 'dead_interval': 40, 'retransmit_interval': 5, 'transmit_delay': 1, 'enable': True, 'cost': 1, 'state': 'bdr', 'hello_timer': '00:00:06:106', 'dr_router_id': '10.0.0.1', 'dr_ip_addr': '172.16.13.1', 'bdr_router_id': '10.0.0.3', 'bdr_ip_addr': '172.16.13.3', 'neighbors': {'10.0.0.1': {'neighbor_router_id': '10.0.0.1', 'address': '172.16.13.1', 'dr_ip_addr': '172.16.13.1', 'bdr_ip_addr': '172.16.13.3', 'state': 'full', 'dead_timer': '00:00:39', 'statistics': {'nbr_event_count': 6, 'nbr_retrans_qlen': 0}}}}, 'GigabitEthernet0/0/0/0': {'name': 'GigabitEthernet0/0/0/0', 'interface_type': 'broadcast', 'passive': False, 'demand_circuit': False, 'priority': 1, 'bfd': {'enable': False}, 'hello_interval': 10, 'dead_interval': 40, 'retransmit_interval': 5, 'transmit_delay': 1, 'enable': True, 'cost': 1, 'state': 'bdr', 'hello_timer': '00:00:06:173', 'dr_router_id': '10.0.0.2', 'dr_ip_addr': '172.16.23.2', 'bdr_router_id': '10.0.0.3', 'bdr_ip_addr': '172.16.23.3', 'neighbors': {'10.0.0.2': {'neighbor_router_id': '10.0.0.2', 'address': '172.16.23.2', 'dr_ip_addr': '172.16.23.2', 'bdr_ip_addr': '172.16.23.3', 'state': 'full', 'dead_timer': '00:00:30', 'statistics': {'nbr_event_count': 6, 'nbr_retrans_qlen': 0}}}}, 'Loopback0': {'name': 'Loopback0', 'interface_type': 'loopback', 'demand_circuit': False, 'bfd': {'enable': False}, 'enable': True, 'cost': 1}}}}, 'maximum_interfaces': 1024, 'redistribution': {'max_prefix': {'num_of_prefix': 10240, 'prefix_thld': 75, 'warn_only': False}, 'static': {'enabled': True}}, 'nsr': {'enable': True}, 'spf_control': {'throttle': {'spf': {'start': 50, 'hold': 200, 'maximum': 5000}, 'lsa': {'start': 50, 'hold': 200, 'maximum': 5000}}}, 'stub_router': {'always': {'always': False, 'include_stub': False, 'summary_lsa': False, 'external_lsa': False}}, 'adjacency_stagger': {'initial_number': 2, 'maximum_number': 64, 'disable': False}}}}}}}}
+raw_data: False</msg>
+<status status="PASS" starttime="20230205 07:03:40.328" endtime="20230205 07:03:40.329"/>
+</kw>
+<return>
+<value>${qdict}</value>
+<status status="PASS" starttime="20230205 07:03:40.329" endtime="20230205 07:03:40.329"/>
+</return>
+<msg timestamp="20230205 07:03:40.329" level="INFO">${model} = {'context_manager': {}, 'attributes': None, 'commands': None, 'connections': None, 'raw_data': False, 'info': {'vrf': {'default': {'address_family': {'ipv4': {'instance': {'1': {'router_id': '10.0.0.3...</msg>
+<status status="PASS" starttime="20230205 07:03:30.900" endtime="20230205 07:03:40.329"/>
+</kw>
+<kw name="dq query" library="genie.libs.robot.GenieRobot">
+<var>${result}</var>
+<arg>data=${model}</arg>
+<arg>filters=value_operator('hello_interval', '&lt;=', 5).get_values('[10]')</arg>
+<doc>Search dictionary using Dq filters</doc>
+<msg timestamp="20230205 07:03:40.330" level="INFO">${result} = []</msg>
+<status status="PASS" starttime="20230205 07:03:40.329" endtime="20230205 07:03:40.330"/>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<arg>${result}</arg>
+<arg>msg=Interfaces ${result} on ${device} have too low hello-interval</arg>
+<doc>Verifies that the given item is empty.</doc>
+<msg timestamp="20230205 07:03:40.331" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20230205 07:03:40.330" endtime="20230205 07:03:40.333"/>
+</kw>
+<status status="PASS" starttime="20230205 07:03:30.900" endtime="20230205 07:03:40.333"/>
+</iter>
+<status status="FAIL" starttime="20230205 07:02:55.361" endtime="20230205 07:03:40.333"/>
+</for>
+<doc>Check that no interface uses hello-interval &lt;= 5 sec</doc>
+<tag>robot:continue-on-failure</tag>
+<status status="FAIL" starttime="20230205 07:02:55.360" endtime="20230205 07:03:40.333">Several failures occurred:
+
+1) Interfaces ['GigabitEthernet2'] on r1 have too low hello-interval
+
+2) Interfaces ['GigabitEthernet2'] on r2 have too low hello-interval</status>
+</test>
+<status status="FAIL" starttime="20230205 07:02:31.600" endtime="20230205 07:03:40.335"/>
+</suite>
+<suite id="s1-s3" name="04-Ntc-Parse" source="/tests/04-ntc-parse.robot">
+<kw name="Run Keywords" library="BuiltIn" type="SETUP">
+<arg>use testbed "testbed.yaml"</arg>
+<arg>AND</arg>
+<arg>connect to devices "${{';'.join($DEVICES)}}"</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="use testbed &quot;testbed.yaml&quot;" library="pyats.robot.pyATSRobot" sourcename="use testbed &quot;${testbed}&quot;">
+<doc>Load testbed YAML file and instantiate testbed object</doc>
+<status status="PASS" starttime="20230205 07:03:40.360" endtime="20230205 07:03:40.406"/>
+</kw>
+<kw name="connect to devices &quot;${{';'.join($DEVICES)}}&quot;" library="pyats.robot.pyATSRobot" sourcename="connect to devices &quot;${devices}&quot;">
+<doc>Connect to devices via connection as defined in testbed.yaml.
+Specify devices with semi-colon separated list, e.g. "R1;R2"</doc>
+<msg timestamp="20230205 07:03:40.408" level="INFO">Connecting to device 'Device r1'</msg>
+<msg timestamp="20230205 07:03:40.408" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:03:47.085" level="INFO">Connecting to device 'Device r2'</msg>
+<msg timestamp="20230205 07:03:47.085" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:03:53.930" level="INFO">2023-02-05 07:03:40,409: %UNICON-INFO: +++ r1 logfile /tmp/r1-cli-20230205T070340409.log +++
+
+2023-02-05 07:03:40,410: %UNICON-INFO: +++ Unicon plugin iosxe (unicon.plugins.iosxe) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:03:40,751: %UNICON-INFO: +++ connection to spawn: ssh -l cldemo 10.12.63.11, id: 139876720465136 +++
+
+2023-02-05 07:03:40,751: %UNICON-INFO: connection to r1
+Warning: Permanently added '10.12.63.11' (RSA) to the list of known hosts.
+(cldemo@10.12.63.11) Password: 
+
+
+
+r1#
+
+2023-02-05 07:03:42,967: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:03:43,033: %UNICON-INFO: +++ r1 with via 'cli': executing command 'term length 0' +++
+term length 0
+r1#
+
+2023-02-05 07:03:43,487: %UNICON-INFO: +++ r1 with via 'cli': executing command 'term width 0' +++
+term width 0
+r1#
+
+2023-02-05 07:03:43,976: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 17.03.04a
+Cisco IOS Software [Amsterdam], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.3.4a, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Tue 20-Jul-21 04:59 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2021 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+r1 uptime is 1 week, 2 days, 14 hours, 47 minutes
+Uptime for this control processor is 1 week, 2 days, 14 hours, 49 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: reload
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+The current throughput level is 1000 kbps 
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1105173K/3075K bytes of memory.
+Processor board ID 9JDNJR1SDGA
+Router operating mode: Autonomous
+4 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3012216K bytes of physical memory.
+6188032K bytes of virtual hard disk at bootflash:.
+
+Configuration register is 0x2102
+
+r1#
+
+2023-02-05 07:03:44,400: %UNICON-INFO: +++ r1 with via 'cli': configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+r1(config)#no logging console
+r1(config)#line console 0
+r1(config-line)#exec-timeout 0
+r1(config-line)#line vty 0 4
+r1(config-line)#exec-timeout 0
+r1(config-line)#end
+r1#
+
+2023-02-05 07:03:47,087: %UNICON-INFO: +++ r2 logfile /tmp/r2-cli-20230205T070347086.log +++
+
+2023-02-05 07:03:47,087: %UNICON-INFO: +++ Unicon plugin iosxe (unicon.plugins.iosxe) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:03:47,524: %UNICON-INFO: +++ connection to spawn: ssh -l cldemo 10.12.63.12, id: 139876720602992 +++
+
+2023-02-05 07:03:47,524: %UNICON-INFO: connection to r2
+Warning: Permanently added '10.12.63.12' (RSA) to the list of known hosts.
+(cldemo@10.12.63.12) Password: 
+
+
+
+r2#
+
+2023-02-05 07:03:50,083: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:03:50,148: %UNICON-INFO: +++ r2 with via 'cli': executing command 'term length 0' +++
+term length 0
+r2#
+
+2023-02-05 07:03:50,601: %UNICON-INFO: +++ r2 with via 'cli': executing command 'term width 0' +++
+term width 0
+r2#
+
+2023-02-05 07:03:51,081: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 17.03.04a
+Cisco IOS Software [Amsterdam], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.3.4a, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Tue 20-Jul-21 04:59 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2021 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+r2 uptime is 1 week, 2 days, 20 hours, 50 minutes
+Uptime for this control processor is 1 week, 2 days, 20 hours, 53 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: factory-reset
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+The current throughput level is 1000 kbps 
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1105173K/3075K bytes of memory.
+Processor board ID 98QLAOEIBMM
+Router operating mode: Autonomous
+4 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3012224K bytes of physical memory.
+6188032K bytes of virtual hard disk at bootflash:.
+
+Configuration register is 0x2102
+
+r2#
+
+2023-02-05 07:03:51,513: %UNICON-INFO: +++ r2 with via 'cli': configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+r2(config)#no logging console
+r2(config)#line console 0
+r2(config-line)#exec-timeout 0
+r2(config-line)#line vty 0 4
+r2(config-line)#exec-timeout 0
+r2(config-line)#end
+r2#</msg>
+<status status="PASS" starttime="20230205 07:03:40.407" endtime="20230205 07:03:53.930"/>
+</kw>
+<status status="PASS" starttime="20230205 07:03:40.360" endtime="20230205 07:03:53.930"/>
+</kw>
+<test id="s1-s3-t1" name="Check OSPF Database via NTC Templates" line="12">
+<kw name="Set Variable" library="BuiltIn">
+<var>${cmd}</var>
+<arg>show ip ospf database</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230205 07:03:53.932" level="INFO">${cmd} = show ip ospf database</msg>
+<status status="PASS" starttime="20230205 07:03:53.931" endtime="20230205 07:03:53.932"/>
+</kw>
+<for flavor="IN">
+<var>${device}</var>
+<value>@{DEVICES}</value>
+<iter>
+<var name="${device}">r1</var>
+<kw name="execute &quot;${cmd}&quot; on device &quot;${device}&quot;" library="unicon.robot.UniconRobot" sourcename="execute &quot;${command}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<var>${output}</var>
+<doc>Execute command on a specific device. "device" name is the name
+of the device from the testbed file</doc>
+<msg timestamp="20230205 07:03:53.939" level="INFO">Executing command show ip ospf database on device r1 alias None</msg>
+<msg timestamp="20230205 07:03:54.482" level="INFO">2023-02-05 07:03:54,001: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip ospf database' +++
+show ip ospf database
+
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+
+		Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+10.0.0.1        10.0.0.1        915         0x800001CD 0x00A03C 3         
+10.0.0.2        10.0.0.2        1209        0x800001B8 0x00E8EE 3         
+10.0.0.3        10.0.0.3        2018        0x800001C1 0x00835F 3         
+
+		Net Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+172.16.12.2     10.0.0.2        1460        0x8000019F 0x00B1FA
+172.16.13.1     10.0.0.1        915         0x80000173 0x0021B7
+172.16.23.2     10.0.0.2        1460        0x800001A7 0x004453
+r1#</msg>
+<msg timestamp="20230205 07:03:54.482" level="INFO">${output} = 
+            OSPF Router with ID (10.0.0.1) (Process ID 1)
+
+		Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+10.0.0.1        10.0.0.1    ...</msg>
+<status status="PASS" starttime="20230205 07:03:53.937" endtime="20230205 07:03:54.482"/>
+</kw>
+<kw name="Parse Output" library="NTC">
+<var>${parsed}</var>
+<arg>platform=cisco_ios</arg>
+<arg>command=${cmd}</arg>
+<arg>data=${output}</arg>
+<doc>Return the structured data based on the output from a network device.</doc>
+<msg timestamp="20230205 07:03:54.656" level="INFO">${parsed} = [{'router_id': '10.0.0.1', 'process_id': '1', 'area': '0', 'link_id': '10.0.0.1', 'adv_router': '10.0.0.1', 'age': '915', 'link_count': '3', 'tag': ''}, {'router_id': '10.0.0.1', 'process_id': '1', 'a...</msg>
+<status status="PASS" starttime="20230205 07:03:54.483" endtime="20230205 07:03:54.656"/>
+</kw>
+<kw name="Log List" library="Collections">
+<arg>${parsed}</arg>
+<doc>Logs the length and contents of the ``list`` using given ``level``.</doc>
+<msg timestamp="20230205 07:03:54.656" level="INFO">List length is 6 and it contains following items:
+0: {'router_id': '10.0.0.1', 'process_id': '1', 'area': '0', 'link_id': '10.0.0.1', 'adv_router': '10.0.0.1', 'age': '915', 'link_count': '3', 'tag': ''}
+1: {'router_id': '10.0.0.1', 'process_id': '1', 'area': '0', 'link_id': '10.0.0.2', 'adv_router': '10.0.0.2', 'age': '1209', 'link_count': '3', 'tag': ''}
+2: {'router_id': '10.0.0.1', 'process_id': '1', 'area': '0', 'link_id': '10.0.0.3', 'adv_router': '10.0.0.3', 'age': '2018', 'link_count': '3', 'tag': ''}
+3: {'router_id': '10.0.0.1', 'process_id': '1', 'area': '0', 'link_id': '172.16.12.2', 'adv_router': '10.0.0.2', 'age': '1460', 'link_count': '', 'tag': ''}
+4: {'router_id': '10.0.0.1', 'process_id': '1', 'area': '0', 'link_id': '172.16.13.1', 'adv_router': '10.0.0.1', 'age': '915', 'link_count': '', 'tag': ''}
+5: {'router_id': '10.0.0.1', 'process_id': '1', 'area': '0', 'link_id': '172.16.23.2', 'adv_router': '10.0.0.2', 'age': '1460', 'link_count': '', 'tag': ''}</msg>
+<status status="PASS" starttime="20230205 07:03:54.656" endtime="20230205 07:03:54.656"/>
+</kw>
+<status status="PASS" starttime="20230205 07:03:53.932" endtime="20230205 07:03:54.656"/>
+</iter>
+<iter>
+<var name="${device}">r2</var>
+<kw name="execute &quot;${cmd}&quot; on device &quot;${device}&quot;" library="unicon.robot.UniconRobot" sourcename="execute &quot;${command}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<var>${output}</var>
+<doc>Execute command on a specific device. "device" name is the name
+of the device from the testbed file</doc>
+<msg timestamp="20230205 07:03:54.657" level="INFO">Executing command show ip ospf database on device r2 alias None</msg>
+<msg timestamp="20230205 07:03:55.190" level="INFO">2023-02-05 07:03:54,722: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show ip ospf database' +++
+show ip ospf database
+
+            OSPF Router with ID (10.0.0.2) (Process ID 1)
+
+		Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+10.0.0.1        10.0.0.1        916         0x800001CD 0x00A03C 3         
+10.0.0.2        10.0.0.2        1209        0x800001B8 0x00E8EE 3         
+10.0.0.3        10.0.0.3        2018        0x800001C1 0x00835F 3         
+
+		Net Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+172.16.12.2     10.0.0.2        1459        0x8000019F 0x00B1FA
+172.16.13.1     10.0.0.1        916         0x80000173 0x0021B7
+172.16.23.2     10.0.0.2        1459        0x800001A7 0x004453
+r2#</msg>
+<msg timestamp="20230205 07:03:55.190" level="INFO">${output} = 
+            OSPF Router with ID (10.0.0.2) (Process ID 1)
+
+		Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+10.0.0.1        10.0.0.1    ...</msg>
+<status status="PASS" starttime="20230205 07:03:54.657" endtime="20230205 07:03:55.190"/>
+</kw>
+<kw name="Parse Output" library="NTC">
+<var>${parsed}</var>
+<arg>platform=cisco_ios</arg>
+<arg>command=${cmd}</arg>
+<arg>data=${output}</arg>
+<doc>Return the structured data based on the output from a network device.</doc>
+<msg timestamp="20230205 07:03:55.194" level="INFO">${parsed} = [{'router_id': '10.0.0.2', 'process_id': '1', 'area': '0', 'link_id': '10.0.0.1', 'adv_router': '10.0.0.1', 'age': '916', 'link_count': '3', 'tag': ''}, {'router_id': '10.0.0.2', 'process_id': '1', 'a...</msg>
+<status status="PASS" starttime="20230205 07:03:55.191" endtime="20230205 07:03:55.194"/>
+</kw>
+<kw name="Log List" library="Collections">
+<arg>${parsed}</arg>
+<doc>Logs the length and contents of the ``list`` using given ``level``.</doc>
+<msg timestamp="20230205 07:03:55.194" level="INFO">List length is 6 and it contains following items:
+0: {'router_id': '10.0.0.2', 'process_id': '1', 'area': '0', 'link_id': '10.0.0.1', 'adv_router': '10.0.0.1', 'age': '916', 'link_count': '3', 'tag': ''}
+1: {'router_id': '10.0.0.2', 'process_id': '1', 'area': '0', 'link_id': '10.0.0.2', 'adv_router': '10.0.0.2', 'age': '1209', 'link_count': '3', 'tag': ''}
+2: {'router_id': '10.0.0.2', 'process_id': '1', 'area': '0', 'link_id': '10.0.0.3', 'adv_router': '10.0.0.3', 'age': '2018', 'link_count': '3', 'tag': ''}
+3: {'router_id': '10.0.0.2', 'process_id': '1', 'area': '0', 'link_id': '172.16.12.2', 'adv_router': '10.0.0.2', 'age': '1459', 'link_count': '', 'tag': ''}
+4: {'router_id': '10.0.0.2', 'process_id': '1', 'area': '0', 'link_id': '172.16.13.1', 'adv_router': '10.0.0.1', 'age': '916', 'link_count': '', 'tag': ''}
+5: {'router_id': '10.0.0.2', 'process_id': '1', 'area': '0', 'link_id': '172.16.23.2', 'adv_router': '10.0.0.2', 'age': '1459', 'link_count': '', 'tag': ''}</msg>
+<status status="PASS" starttime="20230205 07:03:55.194" endtime="20230205 07:03:55.194"/>
+</kw>
+<status status="PASS" starttime="20230205 07:03:54.656" endtime="20230205 07:03:55.194"/>
+</iter>
+<status status="PASS" starttime="20230205 07:03:53.932" endtime="20230205 07:03:55.195"/>
+</for>
+<tag>robot:continue-on-failure</tag>
+<status status="PASS" starttime="20230205 07:03:53.931" endtime="20230205 07:03:55.195"/>
+</test>
+<status status="PASS" starttime="20230205 07:03:40.336" endtime="20230205 07:03:55.196"/>
+</suite>
+<suite id="s1-s4" name="05-Route-Negative" source="/tests/05-route-negative.robot">
+<kw name="Run Keywords" library="BuiltIn" type="SETUP">
+<arg>use testbed "testbed.yaml"</arg>
+<arg>AND</arg>
+<arg>connect to all devices</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<kw name="use testbed &quot;testbed.yaml&quot;" library="pyats.robot.pyATSRobot" sourcename="use testbed &quot;${testbed}&quot;">
+<doc>Load testbed YAML file and instantiate testbed object</doc>
+<status status="PASS" starttime="20230205 07:03:55.217" endtime="20230205 07:03:55.238"/>
+</kw>
+<kw name="connect to all devices" library="pyats.robot.pyATSRobot">
+<doc>Connect to all devices</doc>
+<msg timestamp="20230205 07:03:55.242" level="INFO">Connecting to device 'Device r1'</msg>
+<msg timestamp="20230205 07:03:55.243" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:04:01.880" level="INFO">Connecting to device 'Device r2'</msg>
+<msg timestamp="20230205 07:04:01.880" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:04:08.478" level="INFO">Connecting to device 'Device r3'</msg>
+<msg timestamp="20230205 07:04:08.479" level="INFO">kwargs: {}</msg>
+<msg timestamp="20230205 07:04:18.461" level="INFO">2023-02-05 07:03:55,245: %UNICON-INFO: +++ r1 logfile /tmp/r1-cli-20230205T070355244.log +++
+
+2023-02-05 07:03:55,245: %UNICON-INFO: +++ Unicon plugin iosxe (unicon.plugins.iosxe) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:03:55,672: %UNICON-INFO: +++ connection to spawn: ssh -l cldemo 10.12.63.11, id: 139876719102896 +++
+
+2023-02-05 07:03:55,672: %UNICON-INFO: connection to r1
+Warning: Permanently added '10.12.63.11' (RSA) to the list of known hosts.
+(cldemo@10.12.63.11) Password: 
+
+
+
+r1#
+
+2023-02-05 07:03:58,001: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:03:58,066: %UNICON-INFO: +++ r1 with via 'cli': executing command 'term length 0' +++
+term length 0
+r1#
+
+2023-02-05 07:03:58,527: %UNICON-INFO: +++ r1 with via 'cli': executing command 'term width 0' +++
+term width 0
+r1#
+
+2023-02-05 07:03:59,001: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 17.03.04a
+Cisco IOS Software [Amsterdam], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.3.4a, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Tue 20-Jul-21 04:59 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2021 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+r1 uptime is 1 week, 2 days, 14 hours, 47 minutes
+Uptime for this control processor is 1 week, 2 days, 14 hours, 49 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: reload
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+The current throughput level is 1000 kbps 
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1105173K/3075K bytes of memory.
+Processor board ID 9JDNJR1SDGA
+Router operating mode: Autonomous
+4 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3012216K bytes of physical memory.
+6188032K bytes of virtual hard disk at bootflash:.
+
+Configuration register is 0x2102
+
+r1#
+
+2023-02-05 07:03:59,422: %UNICON-INFO: +++ r1 with via 'cli': configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+r1(config)#no logging console
+r1(config)#line console 0
+r1(config-line)#exec-timeout 0
+r1(config-line)#line vty 0 4
+r1(config-line)#exec-timeout 0
+r1(config-line)#end
+r1#
+
+2023-02-05 07:04:01,882: %UNICON-INFO: +++ r2 logfile /tmp/r2-cli-20230205T070401881.log +++
+
+2023-02-05 07:04:01,882: %UNICON-INFO: +++ Unicon plugin iosxe (unicon.plugins.iosxe) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:04:02,264: %UNICON-INFO: +++ connection to spawn: ssh -l cldemo 10.12.63.12, id: 139876716455680 +++
+
+2023-02-05 07:04:02,264: %UNICON-INFO: connection to r2
+Warning: Permanently added '10.12.63.12' (RSA) to the list of known hosts.
+(cldemo@10.12.63.12) Password: 
+
+
+
+r2#
+
+2023-02-05 07:04:04,638: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:04:04,703: %UNICON-INFO: +++ r2 with via 'cli': executing command 'term length 0' +++
+term length 0
+r2#
+
+2023-02-05 07:04:05,151: %UNICON-INFO: +++ r2 with via 'cli': executing command 'term width 0' +++
+term width 0
+r2#
+
+2023-02-05 07:04:05,636: %UNICON-INFO: +++ r2 with via 'cli': executing command 'show version' +++
+show version
+Cisco IOS XE Software, Version 17.03.04a
+Cisco IOS Software [Amsterdam], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.3.4a, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Tue 20-Jul-21 04:59 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2021 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+r2 uptime is 1 week, 2 days, 20 hours, 51 minutes
+Uptime for this control processor is 1 week, 2 days, 20 hours, 53 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: factory-reset
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+The current throughput level is 1000 kbps 
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 1105173K/3075K bytes of memory.
+Processor board ID 98QLAOEIBMM
+Router operating mode: Autonomous
+4 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3012224K bytes of physical memory.
+6188032K bytes of virtual hard disk at bootflash:.
+
+Configuration register is 0x2102
+
+r2#
+
+2023-02-05 07:04:06,059: %UNICON-INFO: +++ r2 with via 'cli': configure +++
+config term
+Enter configuration commands, one per line.  End with CNTL/Z.
+r2(config)#no logging console
+r2(config)#line console 0
+r2(config-line)#exec-timeout 0
+r2(config-line)#line vty 0 4
+r2(config-line)#exec-timeout 0
+r2(config-line)#end
+r2#
+
+2023-02-05 07:04:08,481: %UNICON-INFO: +++ r3 logfile /tmp/r3-cli-20230205T070408480.log +++
+
+2023-02-05 07:04:08,481: %UNICON-INFO: +++ Unicon plugin iosxr (unicon.plugins.iosxr) +++
+protocol identification string lack carriage return
+
+
+2023-02-05 07:04:09,002: %UNICON-INFO: +++ connection to spawn: ssh -l cisco 10.12.63.13, id: 139876716497408 +++
+
+2023-02-05 07:04:09,003: %UNICON-INFO: connection to r3
+Warning: Permanently added '10.12.63.13' (RSA) to the list of known hosts.
+
+
+
+IMPORTANT:  READ CAREFULLY
+Welcome to the Demo Version of Cisco IOS XRv (the "Software").
+The Software is subject to and governed by the terms and conditions
+of the End User License Agreement and the Supplemental End User
+License Agreement accompanying the product, made available at the
+time of your order, or posted on the Cisco website at
+www.cisco.com/go/terms (collectively, the "Agreement").
+As set forth more fully in the Agreement, use of the Software is
+strictly limited to internal use in a non-production environment
+solely for demonstration and evaluation purposes.  Downloading,
+installing, or using the Software constitutes acceptance of the
+Agreement, and you are binding yourself and the business entity
+that you represent to the Agreement.  If you do not agree to all
+of the terms of the Agreement, then Cisco is unwilling to license
+the Software to you and (a) you may not download, install or use the
+Software, and (b) you may return the Software as more fully set forth
+in the Agreement.
+
+
+Please login with any configured user/password, or cisco/cisco
+
+
+(cisco@10.12.63.13) Password: 
+
+
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:04:12,493: %UNICON-INFO: +++ initializing handle +++
+
+2023-02-05 07:04:12,558: %UNICON-INFO: +++ r3 with via 'cli': executing command 'terminal length 0' +++
+terminal length 0
+Sun Feb  5 07:03:38.277 UTC
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:04:13,271: %UNICON-INFO: +++ r3 with via 'cli': executing command 'terminal width 0' +++
+terminal width 0
+Sun Feb  5 07:03:38.887 UTC
+RP/0/0/CPU0:r3#
+
+2023-02-05 07:04:13,664: %UNICON-INFO: +++ r3 with via 'cli': configure +++
+configure terminal
+Sun Feb  5 07:03:39.327 UTC
+RP/0/0/CPU0:r3(config)#no logging console
+RP/0/0/CPU0:r3(config)#logging console disable
+RP/0/0/CPU0:r3(config)#line console
+RP/0/0/CPU0:r3(config-line)#exec-timeout 0 0
+RP/0/0/CPU0:r3(config-line)#absolute-timeout 0
+RP/0/0/CPU0:r3(config-line)#session-timeout 0
+RP/0/0/CPU0:r3(config-line)#line default
+RP/0/0/CPU0:r3(config-line)#exec-timeout 0 0
+RP/0/0/CPU0:r3(config-line)#absolute-timeout 0
+RP/0/0/CPU0:r3(config-line)#session-timeout 0
+RP/0/0/CPU0:r3(config-line)#commit
+Sun Feb  5 07:03:42.786 UTC
+RP/0/0/CPU0:r3(config-line)#end
+RP/0/0/CPU0:r3#</msg>
+<status status="PASS" starttime="20230205 07:03:55.242" endtime="20230205 07:04:18.465"/>
+</kw>
+<status status="PASS" starttime="20230205 07:03:55.216" endtime="20230205 07:04:18.465"/>
+</kw>
+<test id="s1-s4-t1" name="Positive route distribution test" line="15">
+<kw name="Set Variable" library="BuiltIn">
+<var>${cmd}</var>
+<arg>router static address-family ipv4 unicast ${route_positive} Null0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230205 07:04:18.466" level="INFO">${cmd} = router static address-family ipv4 unicast 10.100.99.0/24 Null0</msg>
+<status status="PASS" starttime="20230205 07:04:18.466" endtime="20230205 07:04:18.466"/>
+</kw>
+<kw name="configure &quot;${cmd}&quot; on device &quot;${edge_device}&quot;" library="unicon.robot.UniconRobot" sourcename="configure &quot;${config:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<doc>Configure a device with the configuration provided.</doc>
+<msg timestamp="20230205 07:04:18.468" level="INFO">Configuring router static address-family ipv4 unicast 10.100.99.0/24 Null0 on device r3 alias None</msg>
+<msg timestamp="20230205 07:04:20.841" level="INFO">2023-02-05 07:04:18,468: %UNICON-INFO: +++ r3 with via 'cli': configure +++
+configure terminal
+Sun Feb  5 07:03:44.176 UTC
+RP/0/0/CPU0:r3(config)#router static address-family ipv4 unicast 10.100.99.0/24 Null0
+RP/0/0/CPU0:r3(config)#commit
+Sun Feb  5 07:03:45.386 UTC
+RP/0/0/CPU0:r3(config)#end
+RP/0/0/CPU0:r3#</msg>
+<status status="PASS" starttime="20230205 07:04:18.467" endtime="20230205 07:04:20.841"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230205 07:04:21.842" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20230205 07:04:20.841" endtime="20230205 07:04:21.842"/>
+</kw>
+<kw name="validate route on device">
+<arg>${core_device}</arg>
+<arg>${route_positive}</arg>
+<kw name="parse &quot;show ip route ospf&quot; on device &quot;${device}&quot;" library="genie.libs.robot.GenieRobot" sourcename="parse &quot;${parser:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<var>${output}</var>
+<doc>Call any `metaparser` parser and parse the device output.</doc>
+<msg timestamp="20230205 07:04:22.470" level="INFO">2023-02-05 07:04:21,984: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip route ospf' +++
+show ip route ospf
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, m - OMP
+       n - NAT, Ni - NAT inside, No - NAT outside, Nd - NAT DIA
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       H - NHRP, G - NHRP registered, g - NHRP registration summary
+       o - ODR, P - periodic downloaded static route, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+       &amp; - replicated local route overrides by connected
+
+Gateway of last resort is 10.12.63.1 to network 0.0.0.0
+
+      10.0.0.0/8 is variably subnetted, 6 subnets, 2 masks
+O        10.0.0.2/32 [110/11] via 172.16.12.2, 1w0d, GigabitEthernet2
+O        10.0.0.3/32 [110/21] via 172.16.13.3, 1w1d, GigabitEthernet3
+O E2     10.100.99.0/24 [110/20] via 172.16.13.3, 00:00:02, GigabitEthernet3
+      172.16.0.0/16 is variably subnetted, 5 subnets, 2 masks
+O        172.16.23.0/24 [110/21] via 172.16.13.3, 1w1d, GigabitEthernet3
+r1#</msg>
+<msg timestamp="20230205 07:04:22.471" level="INFO">${output} = {'vrf': {'default': {'address_family': {'ipv4': {'routes': {'10.0.0.2/32': {'route': '10.0.0.2/32', 'active': True, 'metric': 11, 'route_preference': 110, 'source_protocol_codes': 'O', 'source_protoco...</msg>
+<status status="PASS" starttime="20230205 07:04:21.843" endtime="20230205 07:04:22.471"/>
+</kw>
+<kw name="dq query" library="genie.libs.robot.GenieRobot">
+<var>${routes}</var>
+<arg>data=${output}</arg>
+<arg>filters=contains('${prefix}')</arg>
+<doc>Search dictionary using Dq filters</doc>
+<msg timestamp="20230205 07:04:22.472" level="INFO">${routes} = {'vrf': {'default': {'address_family': {'ipv4': {'routes': {'10.100.99.0/24': {'route': '10.100.99.0/24', 'active': True, 'metric': 20, 'route_preference': 110, 'source_protocol_codes': 'O E2', 'sourc...</msg>
+<status status="PASS" starttime="20230205 07:04:22.471" endtime="20230205 07:04:22.472"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${routes}</arg>
+<arg>msg=Route not found</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20230205 07:04:22.472" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230205 07:04:22.472" endtime="20230205 07:04:22.472"/>
+</kw>
+<status status="PASS" starttime="20230205 07:04:21.842" endtime="20230205 07:04:22.472"/>
+</kw>
+<kw name="configure &quot;no router static address-family ipv4 unicast 10.100.99.0/24 Null0&quot; on device &quot;r3&quot;" library="unicon.robot.UniconRobot" type="TEARDOWN" sourcename="configure &quot;${config:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<doc>Configure a device with the configuration provided.</doc>
+<msg timestamp="20230205 07:04:22.473" level="INFO">Configuring no router static address-family ipv4 unicast 10.100.99.0/24 Null0 on device r3 alias None</msg>
+<msg timestamp="20230205 07:04:24.694" level="INFO">2023-02-05 07:04:22,473: %UNICON-INFO: +++ r3 with via 'cli': configure +++
+configure terminal
+Sun Feb  5 07:03:48.256 UTC
+RP/0/0/CPU0:r3(config)#no router static address-family ipv4 unicast 10.100.99.0/24 Null0
+RP/0/0/CPU0:r3(config)#commit
+Sun Feb  5 07:03:49.256 UTC
+RP/0/0/CPU0:r3(config)#end
+RP/0/0/CPU0:r3#</msg>
+<status status="PASS" starttime="20230205 07:04:22.473" endtime="20230205 07:04:24.694"/>
+</kw>
+<status status="PASS" starttime="20230205 07:04:18.465" endtime="20230205 07:04:24.694"/>
+</test>
+<test id="s1-s4-t2" name="Negative route distribution test" line="22">
+<kw name="Set Variable" library="BuiltIn">
+<var>${cmd}</var>
+<arg>router static address-family ipv4 unicast ${route_negative} Null0</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230205 07:04:24.696" level="INFO">${cmd} = router static address-family ipv4 unicast 192.168.99.0/24 Null0</msg>
+<status status="PASS" starttime="20230205 07:04:24.695" endtime="20230205 07:04:24.696"/>
+</kw>
+<kw name="configure &quot;${cmd}&quot; on device &quot;${edge_device}&quot;" library="unicon.robot.UniconRobot" sourcename="configure &quot;${config:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<doc>Configure a device with the configuration provided.</doc>
+<msg timestamp="20230205 07:04:24.698" level="INFO">Configuring router static address-family ipv4 unicast 192.168.99.0/24 Null0 on device r3 alias None</msg>
+<msg timestamp="20230205 07:04:26.850" level="INFO">2023-02-05 07:04:24,697: %UNICON-INFO: +++ r3 with via 'cli': configure +++
+configure terminal
+Sun Feb  5 07:03:50.466 UTC
+RP/0/0/CPU0:r3(config)#router static address-family ipv4 unicast 192.168.99.0/24 Null0
+RP/0/0/CPU0:r3(config)#commit
+Sun Feb  5 07:03:51.426 UTC
+RP/0/0/CPU0:r3(config)#end
+RP/0/0/CPU0:r3#</msg>
+<status status="PASS" starttime="20230205 07:04:24.697" endtime="20230205 07:04:26.850"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230205 07:04:27.851" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20230205 07:04:26.850" endtime="20230205 07:04:27.851"/>
+</kw>
+<kw name="Run Keyword And Expect Error" library="BuiltIn">
+<arg>Route not found</arg>
+<arg>validate route on device</arg>
+<arg>${core_device}</arg>
+<arg>${route_negative}</arg>
+<doc>Runs the keyword and checks that the expected error occurred.</doc>
+<kw name="validate route on device">
+<arg>${core_device}</arg>
+<arg>${route_negative}</arg>
+<kw name="parse &quot;show ip route ospf&quot; on device &quot;${device}&quot;" library="genie.libs.robot.GenieRobot" sourcename="parse &quot;${parser:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<var>${output}</var>
+<doc>Call any `metaparser` parser and parse the device output.</doc>
+<msg timestamp="20230205 07:04:28.469" level="INFO">2023-02-05 07:04:27,994: %UNICON-INFO: +++ r1 with via 'cli': executing command 'show ip route ospf' +++
+show ip route ospf
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, m - OMP
+       n - NAT, Ni - NAT inside, No - NAT outside, Nd - NAT DIA
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       H - NHRP, G - NHRP registered, g - NHRP registration summary
+       o - ODR, P - periodic downloaded static route, l - LISP
+       a - application route
+       + - replicated route, % - next hop override, p - overrides from PfR
+       &amp; - replicated local route overrides by connected
+
+Gateway of last resort is 10.12.63.1 to network 0.0.0.0
+
+      10.0.0.0/8 is variably subnetted, 5 subnets, 2 masks
+O        10.0.0.2/32 [110/11] via 172.16.12.2, 1w0d, GigabitEthernet2
+O        10.0.0.3/32 [110/21] via 172.16.13.3, 1w1d, GigabitEthernet3
+      172.16.0.0/16 is variably subnetted, 5 subnets, 2 masks
+O        172.16.23.0/24 [110/21] via 172.16.13.3, 1w1d, GigabitEthernet3
+r1#</msg>
+<msg timestamp="20230205 07:04:28.470" level="INFO">${output} = {'vrf': {'default': {'address_family': {'ipv4': {'routes': {'10.0.0.2/32': {'route': '10.0.0.2/32', 'active': True, 'metric': 11, 'route_preference': 110, 'source_protocol_codes': 'O', 'source_protoco...</msg>
+<status status="PASS" starttime="20230205 07:04:27.852" endtime="20230205 07:04:28.470"/>
+</kw>
+<kw name="dq query" library="genie.libs.robot.GenieRobot">
+<var>${routes}</var>
+<arg>data=${output}</arg>
+<arg>filters=contains('${prefix}')</arg>
+<doc>Search dictionary using Dq filters</doc>
+<msg timestamp="20230205 07:04:28.471" level="INFO">${routes} = {}</msg>
+<status status="PASS" starttime="20230205 07:04:28.470" endtime="20230205 07:04:28.471"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${routes}</arg>
+<arg>msg=Route not found</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20230205 07:04:28.471" level="INFO">Length is 0</msg>
+<msg timestamp="20230205 07:04:28.471" level="FAIL">Route not found</msg>
+<status status="FAIL" starttime="20230205 07:04:28.471" endtime="20230205 07:04:28.471"/>
+</kw>
+<status status="FAIL" starttime="20230205 07:04:27.851" endtime="20230205 07:04:28.471"/>
+</kw>
+<status status="PASS" starttime="20230205 07:04:27.851" endtime="20230205 07:04:28.472"/>
+</kw>
+<kw name="configure &quot;no router static address-family ipv4 unicast 192.168.99.0/24 Null0&quot; on device &quot;r3&quot;" library="unicon.robot.UniconRobot" type="TEARDOWN" sourcename="configure &quot;${config:[^&quot;]+}&quot; on device &quot;${device:[^&quot;]+}&quot;">
+<doc>Configure a device with the configuration provided.</doc>
+<msg timestamp="20230205 07:04:28.473" level="INFO">Configuring no router static address-family ipv4 unicast 192.168.99.0/24 Null0 on device r3 alias None</msg>
+<msg timestamp="20230205 07:04:30.663" level="INFO">2023-02-05 07:04:28,473: %UNICON-INFO: +++ r3 with via 'cli': configure +++
+configure terminal
+Sun Feb  5 07:03:54.266 UTC
+RP/0/0/CPU0:r3(config)#no router static address-family ipv4 unicast 192.168.99.0/24 Null0
+RP/0/0/CPU0:r3(config)#commit
+Sun Feb  5 07:03:55.266 UTC
+RP/0/0/CPU0:r3(config)#end
+RP/0/0/CPU0:r3#</msg>
+<status status="PASS" starttime="20230205 07:04:28.472" endtime="20230205 07:04:30.663"/>
+</kw>
+<status status="PASS" starttime="20230205 07:04:24.695" endtime="20230205 07:04:30.663"/>
+</test>
+<status status="PASS" starttime="20230205 07:03:55.198" endtime="20230205 07:04:30.664"/>
+</suite>
+<status status="FAIL" starttime="20230205 07:02:19.828" endtime="20230205 07:04:30.665"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="1" skip="0" id="s1" name="CiscoLive-Demo">CiscoLive-Demo</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="01-Ospf-Nbr">CiscoLive-Demo.01-Ospf-Nbr</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s2" name="04-Genie-Learn">CiscoLive-Demo.04-Genie-Learn</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s3" name="04-Ntc-Parse">CiscoLive-Demo.04-Ntc-Parse</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s4" name="05-Route-Negative">CiscoLive-Demo.05-Route-Negative</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

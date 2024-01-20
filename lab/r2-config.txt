@@ -145,11 +145,13 @@ interface Loopback0
  ipv6 address FD00::2/128
  ipv6 ospf 1 area 0
 !
-interface GigabitEthernet1
- ip address 10.12.63.12 255.255.255.0
+interface GigabitEthernet26
+ description lab management interface
+ ip address 10.12.142.12 255.255.255.0
  negotiation auto
  no mop enabled
  no mop sysid
+ no shutdown
 !
 interface GigabitEthernet2
  ip address 172.16.12.2 255.255.255.0
@@ -162,6 +164,7 @@ interface GigabitEthernet2
  ipv6 ospf cost 10
  no mop enabled
  no mop sysid
+ no shutdown
 !
 interface GigabitEthernet3
  ip address 172.16.23.2 255.255.255.0
@@ -173,6 +176,7 @@ interface GigabitEthernet3
  ipv6 ospf cost 20
  no mop enabled
  no mop sysid
+ no shutdown
 !
 interface GigabitEthernet4
  no ip address
@@ -186,7 +190,7 @@ ip forward-protocol nd
 no ip http server
 ip http secure-server
 !
-ip route 0.0.0.0 0.0.0.0 10.12.63.1
+ip route 0.0.0.0 0.0.0.0 10.12.142.1
 !
 !
 ipv6 router ospf 1

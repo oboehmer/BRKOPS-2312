@@ -12,20 +12,20 @@ devices:
     connections:
       cli:
         protocol: ssh
-        ip: 10.12.63.11
+        ip: 10.12.142.11
   r2:
     os: iosxe
     connections:
       cli:
         protocol: ssh
-        ip: 10.12.63.12
+        ip: 10.12.142.12
   r3:
     os: iosxr
     credentials:
       default:
         username: cisco
-        password: cisco
+        password: "%ENV{DEVICE_PASSWORD}"
     connections:
       cli:
         protocol: ssh
-        ip: 10.12.63.13
+        ip: 10.12.142.13

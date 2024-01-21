@@ -24,12 +24,12 @@ interface Loopback0
 interface MgmtEth0/0/CPU0/0
  ipv4 address 10.12.142.13 255.255.255.0
 !
-interface GigabitEthernet0/0/0/2
+interface GigabitEthernet0/0/0/0
  ipv4 address 172.16.23.3 255.255.255.0
  ipv6 address fd00:a:a:23::3/64
  no shutdown
 !
-interface GigabitEthernet0/0/0/3
+interface GigabitEthernet0/0/0/1
  ipv4 address 172.16.13.3 255.255.255.0
  ipv6 address fd00:a:a:13::3/64
  no shutdown

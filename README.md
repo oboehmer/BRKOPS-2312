@@ -7,7 +7,7 @@ In order to run them, you need a Linux, MacOS or WSL Python3 virtual environment
 
 ## RobotFramework Logfile Examples
 
-Logfile and Report when executing all the sample tests provided:
+Logfile and Report when executing all the sample tests provided (please download and view in your browser):
 
 - [Detailed HTML Log File](all-tests_logs.html)
 - [Summary Report](all-tests_report.html)

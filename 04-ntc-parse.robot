@@ -18,6 +18,7 @@ Check OSPF Database via NTC Templates
         ${output}=    execute "${cmd}" on device "${device}"
         ${parsed}=    NTC.Parse Output    platform=cisco_ios    command=${cmd}    data=${output}
 
-        # just logging the list, actual test is left for the reader ;-) 
+        # just logging the list, actual test is left as homework ;-)
         Log List    ${parsed}
     END
+

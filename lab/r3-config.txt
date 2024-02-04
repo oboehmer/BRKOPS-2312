@@ -1,10 +1,5 @@
 
 
-Sun Jan 29 15:32:16.818 UTC
-Building configuration...
-!! IOS XR Configuration 6.3.1
-!! Last configuration change at Sun Jan 29 09:18:47 2023 by cisco
-!
 hostname r3
 logging console disable
 address-family ipv4 unicast
@@ -27,18 +22,17 @@ interface Loopback0
  ipv6 address fd00::3/128
 !
 interface MgmtEth0/0/CPU0/0
- ipv4 address 10.12.63.13 255.255.255.0
+ ipv4 address 10.12.142.13 255.255.255.0
 !
 interface GigabitEthernet0/0/0/0
  ipv4 address 172.16.23.3 255.255.255.0
  ipv6 address fd00:a:a:23::3/64
+ no shutdown
 !
 interface GigabitEthernet0/0/0/1
  ipv4 address 172.16.13.3 255.255.255.0
  ipv6 address fd00:a:a:13::3/64
-!
-interface GigabitEthernet0/0/0/2
- shutdown
+ no shutdown
 !
 route-policy static2ospf
   if destination in (10.0.0.0/8 le 32) then
@@ -48,8 +42,8 @@ end-policy
 !
 router static
  address-family ipv4 unicast
-  0.0.0.0/0 10.12.63.1
- !
+  0.0.0.0/0 10.12.142.1
+!
 !
 router ospf 1
  redistribute static route-policy static2ospf
@@ -58,9 +52,9 @@ router ospf 1
   interface Loopback0
    passive enable
   !
-  interface GigabitEthernet0/0/0/0
+  interface GigabitEthernet0/0/0/2
   !
-  interface GigabitEthernet0/0/0/1
+  interface GigabitEthernet0/0/0/3
   !
  !
 !
@@ -69,9 +63,9 @@ router ospfv3 1
   interface Loopback0
    passive
   !
-  interface GigabitEthernet0/0/0/0
+  interface GigabitEthernet0/0/0/2
   !
-  interface GigabitEthernet0/0/0/1
+  interface GigabitEthernet0/0/0/3
   !
  !
 !
